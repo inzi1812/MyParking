@@ -14,6 +14,8 @@
 		C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C96B5EAC264C7AFA003942ED /* MyParking.xcdatamodeld */; };
 		C96B5EB0264C7AFB003942ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EAF264C7AFB003942ED /* Assets.xcassets */; };
 		C96B5EB3264C7AFB003942ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */; };
+		D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC60FE2650067C00347F70 /* SignUpViewController.swift */; };
+		D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC610026500C9D00347F70 /* SignInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		C96B5EAF264C7AFB003942ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C96B5EB2264C7AFB003942ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C96B5EB4264C7AFB003942ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6BC60FE2650067C00347F70 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D6BC610026500C9D00347F70 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +65,13 @@
 				C96B5EA3264C7AFA003942ED /* AppDelegate.swift */,
 				C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */,
 				C96B5EA7264C7AFA003942ED /* ViewController.swift */,
+				D6BC60FE2650067C00347F70 /* SignUpViewController.swift */,
 				C96B5EA9264C7AFA003942ED /* Main.storyboard */,
 				C96B5EAF264C7AFB003942ED /* Assets.xcassets */,
 				C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */,
 				C96B5EB4264C7AFB003942ED /* Info.plist */,
 				C96B5EAC264C7AFA003942ED /* MyParking.xcdatamodeld */,
+				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
 			);
 			path = MyParking;
 			sourceTree = "<group>";
@@ -142,8 +148,10 @@
 			files = (
 				C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */,
 				C96B5EA8264C7AFA003942ED /* ViewController.swift in Sources */,
+				D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */,
 				C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */,
 				C96B5EA6264C7AFA003942ED /* SceneDelegate.swift in Sources */,
+				D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
