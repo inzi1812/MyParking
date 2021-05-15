@@ -27,7 +27,8 @@ Create an iOS application for the Parking App with the following functionalities
 
 => User Profile:
 Your app must provide appropriate interface to sign-up, sign-in, sign-out, update profile and delete account. Consider requesting name, email, password, contact number and car plate number from user when they create their account.
-If you are inclined and interested in adding profile picture functionality, you may add that in your app. However, it is not the official requirement of the project. No additional grades will be awarded or deducted for including (or not including) this functionality.
+If you are inclined and interested in adding profile picture functionality, you may add that in your app. However, it is not the official requirement of the project. 
+No additional grades will be awarded or deducted for including (or not including) this functionality.
 
 => Add Parking:
 The add parking facility should allow the user to create a new parking record with the following information.
@@ -56,8 +57,10 @@ In the detail view of parking, allow the user to open the parking location on ma
 => Evaluation Criteria:
 
 Fundamental iOS Functionalities: (10%)
-You should use appropriate iOS view components such as TableViews, Pickers, Navigation Controller, etc. for suitable features in your app. There should be appropriate navigation between the views. 
-Use appropriate mechanisms to exchange or share data between views. User inputs must be validated and verified with appropriate rules.
+You should use appropriate iOS view components such as TableViews, Pickers, Navigation Controller, etc. for suitable
+features in your app. There should be appropriate navigation between the views. 
+Use appropriate mechanisms to exchange or share data between views. User inputs must be validated and verified
+with appropriate rules.
 
 Data Persistence: (15%)
 You must use CoreData or Firebase for data persistence in your app. 
@@ -75,8 +78,7 @@ User Interface: (10%)
 => Code Organization and Version Controlling: (10%)
 ● Your app must be structured using appropriate architecture such as MVVM or MVC.
 ● The code must be modular, and use appropriate naming conventions.
-● Your project must be version controlled using GitHub. The GitHub repository should be
-private having all the team members and prof as the collaborators. 
+● Your project must be version controlled using GitHub. The GitHub repository should be private having all the team members and prof as the collaborators. 
 Each of the team member must be working on their individual branch of the project, perform regular commits and merge their work with master branch of the repository. 
 Your repository must be private. A public repository means that anyone (including other learners) can see your code.
 This puts you at risk of Academic Integrity issues.
@@ -87,18 +89,13 @@ This puts you at risk of Academic Integrity issues.
 
 => Project Demonstration: (40%)
 Before demonstration of the project, make sure that you
-● merge all the branches of individual team members to the master branch of your repository
-on GitHub,
-● update the ReadMe file of your repository to reflect the functionalities accomplished and add
-the screenshots for various screens in your app, During the demonstration of your project
+● merge all the branches of individual team members to the master branch of your repository on GitHub,
+● update the ReadMe file of your repository to reflect the functionalities accomplished and add the screenshots for various screens in your app, During the demonstration of your project
 ● code walkthroughs are to be provided by each team member for the functionalities and/or use-cases they are listed as owner and
 ● question-answer to be conducted with entire team and individual team members by prof.
-● each team member must be able to demonstrate proficiency for the topics included in the project work such as fundamental iOS functionalities, user-interface, data persistence,
-location services, version controlling, etc.
+● each team member must be able to demonstrate proficiency for the topics included in the project work such as fundamental iOS functionalities, user-interface, data persistence, location services, version controlling, etc.
 
 => Note:
 ● Each member of the team must be available at the time of project demonstration. Final grade for the project will only be assigned after the demonstration given by all the team members.
-● More details about the mechanism and scheduling of the demonstration will be provided to
-you.
-● Your work will only be graded if you are present in the project demonstration and are able
-to successfully demonstrate your project.
+● More details about the mechanism and scheduling of the demonstration will be provided to you.
+● Your work will only be graded if you are present in the project demonstration and are able to successfully demonstrate your project.
