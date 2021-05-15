@@ -80,6 +80,7 @@ private having all the team members and prof as the collaborators.
 Each of the team member must be working on their individual branch of the project, perform regular commits and merge their work with master branch of the repository. 
 Your repository must be private. A public repository means that anyone (including other learners) can see your code.
 This puts you at risk of Academic Integrity issues.
+
 ● Add the instructors as collaborators to your Github repository. This allows instructors to assess your work. See course webpage for instructor information.
 ● Contribution in the project by each of the team member will be determining factor for individual grading.
 ● In the ReadMe file of your GitHub repository, provide the work distribution for each of the team member. There must be exactly one owner for a functionality and/or use-case. Specify the name and student id for each of the members along with functionalities and use-cases they will be responsible for. Your individual grade will depend on the functionality and/or use-case for which you are the owner.
@@ -96,7 +97,8 @@ the screenshots for various screens in your app, During the demonstration of you
 location services, version controlling, etc.
 
 => Note:
-● Each member of the team must be available at the time of project demonstration. Final grade for the project will only be assigned after the demonstration given by all the team members. ● More details about the mechanism and scheduling of the demonstration will be provided to
+● Each member of the team must be available at the time of project demonstration. Final grade for the project will only be assigned after the demonstration given by all the team members.
+● More details about the mechanism and scheduling of the demonstration will be provided to
 you.
 ● Your work will only be graded if you are present in the project demonstration and are able
 to successfully demonstrate your project.
