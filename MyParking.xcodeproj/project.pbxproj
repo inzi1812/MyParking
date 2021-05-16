@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		C96B5EB0264C7AFB003942ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EAF264C7AFB003942ED /* Assets.xcassets */; };
 		C96B5EB3264C7AFB003942ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */; };
 		C99E928F265045F800BB20A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C99E928E265045F800BB20A9 /* GoogleService-Info.plist */; };
+		C99E92982650E57400BB20A9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92972650E57400BB20A9 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		C96B5EB2264C7AFB003942ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C96B5EB4264C7AFB003942ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C99E928E265045F800BB20A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C99E92972650E57400BB20A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,6 @@
 				BB4121D247B1362B30D8F256 /* Pods-MyParking.debug.xcconfig */,
 				189E39D5A41FC34EA64CE966 /* Pods-MyParking.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -85,6 +86,7 @@
 		C96B5EA2264C7AFA003942ED /* MyParking */ = {
 			isa = PBXGroup;
 			children = (
+				C99E92962650E56700BB20A9 /* Models */,
 				C96B5EA3264C7AFA003942ED /* AppDelegate.swift */,
 				C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */,
 				C96B5EA7264C7AFA003942ED /* ViewController.swift */,
@@ -96,6 +98,14 @@
 				C99E928E265045F800BB20A9 /* GoogleService-Info.plist */,
 			);
 			path = MyParking;
+			sourceTree = "<group>";
+		};
+		C99E92962650E56700BB20A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C99E92972650E57400BB20A9 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +226,7 @@
 				C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */,
 				C96B5EA8264C7AFA003942ED /* ViewController.swift in Sources */,
 				C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */,
+				C99E92982650E57400BB20A9 /* User.swift in Sources */,
 				C96B5EA6264C7AFA003942ED /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
