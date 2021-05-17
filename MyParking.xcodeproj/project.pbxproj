@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		209424D24598114FC35BF5C2 /* Pods_MyParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C135D7D08DE2D7A5525411 /* Pods_MyParking.framework */; };
 		C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96B5EA3264C7AFA003942ED /* AppDelegate.swift */; };
 		C96B5EA6264C7AFA003942ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */; };
 		C96B5EA8264C7AFA003942ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96B5EA7264C7AFA003942ED /* ViewController.swift */; };
@@ -16,9 +17,18 @@
 		C96B5EB3264C7AFB003942ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */; };
 		D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC60FE2650067C00347F70 /* SignUpViewController.swift */; };
 		D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC610026500C9D00347F70 /* SignInViewController.swift */; };
+		C99E928F265045F800BB20A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C99E928E265045F800BB20A9 /* GoogleService-Info.plist */; };
+		C99E92982650E57400BB20A9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92972650E57400BB20A9 /* User.swift */; };
+		C99E929A2651D0FE00BB20A9 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92992651D0FE00BB20A9 /* Parking.swift */; };
+		C99E929C2651D16E00BB20A9 /* ParkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E929B2651D16E00BB20A9 /* ParkingHours.swift */; };
+		C99E929E2651D2DC00BB20A9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E929D2651D2DC00BB20A9 /* Location.swift */; };
+		C99E92A126520DEE00BB20A9 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92A026520DEE00BB20A9 /* DBHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		189E39D5A41FC34EA64CE966 /* Pods-MyParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyParking.release.xcconfig"; path = "Target Support Files/Pods-MyParking/Pods-MyParking.release.xcconfig"; sourceTree = "<group>"; };
+		83C135D7D08DE2D7A5525411 /* Pods_MyParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB4121D247B1362B30D8F256 /* Pods-MyParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyParking.debug.xcconfig"; path = "Target Support Files/Pods-MyParking/Pods-MyParking.debug.xcconfig"; sourceTree = "<group>"; };
 		C96B5EA0264C7AFA003942ED /* MyParking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyParking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96B5EA3264C7AFA003942ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +40,12 @@
 		C96B5EB4264C7AFB003942ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6BC60FE2650067C00347F70 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D6BC610026500C9D00347F70 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		C99E928E265045F800BB20A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C99E92972650E57400BB20A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C99E92992651D0FE00BB20A9 /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
+		C99E929B2651D16E00BB20A9 /* ParkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingHours.swift; sourceTree = "<group>"; };
+		C99E929D2651D2DC00BB20A9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		C99E92A026520DEE00BB20A9 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +53,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				209424D24598114FC35BF5C2 /* Pods_MyParking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27BB56F7CFF9862660BF697D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BB4121D247B1362B30D8F256 /* Pods-MyParking.debug.xcconfig */,
+				189E39D5A41FC34EA64CE966 /* Pods-MyParking.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5A82BD0F8C5A693077614316 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83C135D7D08DE2D7A5525411 /* Pods_MyParking.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C96B5E97264C7AFA003942ED = {
 			isa = PBXGroup;
 			children = (
 				C96B5EA2264C7AFA003942ED /* MyParking */,
 				C96B5EA1264C7AFA003942ED /* Products */,
+				27BB56F7CFF9862660BF697D /* Pods */,
+				5A82BD0F8C5A693077614316 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +98,8 @@
 		C96B5EA2264C7AFA003942ED /* MyParking */ = {
 			isa = PBXGroup;
 			children = (
+				C99E929F26520DCE00BB20A9 /* Database Helper */,
+				C99E92962650E56700BB20A9 /* Models */,
 				C96B5EA3264C7AFA003942ED /* AppDelegate.swift */,
 				C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */,
 				C96B5EA7264C7AFA003942ED /* ViewController.swift */,
@@ -72,8 +110,28 @@
 				C96B5EB4264C7AFB003942ED /* Info.plist */,
 				C96B5EAC264C7AFA003942ED /* MyParking.xcdatamodeld */,
 				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
+				C99E928E265045F800BB20A9 /* GoogleService-Info.plist */,
 			);
 			path = MyParking;
+			sourceTree = "<group>";
+		};
+		C99E92962650E56700BB20A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C99E92972650E57400BB20A9 /* User.swift */,
+				C99E92992651D0FE00BB20A9 /* Parking.swift */,
+				C99E929B2651D16E00BB20A9 /* ParkingHours.swift */,
+				C99E929D2651D2DC00BB20A9 /* Location.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C99E929F26520DCE00BB20A9 /* Database Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C99E92A026520DEE00BB20A9 /* DBHelper.swift */,
+			);
+			path = "Database Helper";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C96B5EB7264C7AFB003942ED /* Build configuration list for PBXNativeTarget "MyParking" */;
 			buildPhases = (
+				0A847F4906EA6DC26D7BDE31 /* [CP] Check Pods Manifest.lock */,
 				C96B5E9C264C7AFA003942ED /* Sources */,
 				C96B5E9D264C7AFA003942ED /* Frameworks */,
 				C96B5E9E264C7AFA003942ED /* Resources */,
+				1C5AE707B74E26A538EB9BC4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -134,12 +194,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96B5EB3264C7AFB003942ED /* LaunchScreen.storyboard in Resources */,
+				C99E928F265045F800BB20A9 /* GoogleService-Info.plist in Resources */,
 				C96B5EB0264C7AFB003942ED /* Assets.xcassets in Resources */,
 				C96B5EAB264C7AFA003942ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A847F4906EA6DC26D7BDE31 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyParking-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1C5AE707B74E26A538EB9BC4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyParking/Pods-MyParking-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyParking/Pods-MyParking-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyParking/Pods-MyParking-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C96B5E9C264C7AFA003942ED /* Sources */ = {
@@ -149,7 +252,12 @@
 				C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */,
 				C96B5EA8264C7AFA003942ED /* ViewController.swift in Sources */,
 				D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */,
+				C99E929E2651D2DC00BB20A9 /* Location.swift in Sources */,
+				C99E929C2651D16E00BB20A9 /* ParkingHours.swift in Sources */,
+				C99E92A126520DEE00BB20A9 /* DBHelper.swift in Sources */,
 				C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */,
+				C99E92982650E57400BB20A9 /* User.swift in Sources */,
+				C99E929A2651D0FE00BB20A9 /* Parking.swift in Sources */,
 				C96B5EA6264C7AFA003942ED /* SceneDelegate.swift in Sources */,
 				D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */,
 			);
@@ -295,6 +403,7 @@
 		};
 		C96B5EB8264C7AFB003942ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB4121D247B1362B30D8F256 /* Pods-MyParking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -314,6 +423,7 @@
 		};
 		C96B5EB9264C7AFB003942ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 189E39D5A41FC34EA64CE966 /* Pods-MyParking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
