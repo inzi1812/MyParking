@@ -29,6 +29,7 @@ class DBHelper
     private var firestore : Firestore
     
     private init() {
+        
         self.firestore = Firestore.firestore()
     }
     
