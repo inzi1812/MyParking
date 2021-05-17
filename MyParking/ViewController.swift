@@ -27,8 +27,6 @@ class ViewController: UIViewController {
         
     }
     
-    
-    
     @IBAction func btnSignUpClicked(_ sender: Any) {
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
