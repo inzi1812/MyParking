@@ -9,11 +9,7 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-    }
+    
     
     @IBOutlet weak var tfName: UITextField!
     
@@ -24,6 +20,13 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var tfContactNumber: UITextField!
     
     @IBOutlet weak var tfCarplateNumber: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
+    
+   
     
     @IBAction func btnSignUpClicked(_ sender: Any) {
         
@@ -36,7 +39,7 @@ class SignUpViewController: UIViewController {
         }
         
         else if(tfPassword.text == ""){
-            showAlert(title: "Empty Credentials", message: "Please enter correct value for password.")
+            showAlert(title: "Empty Credentials", message: "Please enter correct value for password")
         }
         
         else if(tfContactNumber.text == ""){
@@ -44,10 +47,11 @@ class SignUpViewController: UIViewController {
         }
         
         else if(tfCarplateNumber.text == ""){
-            showAlert(title: "Empty Credentials", message: "Please enter correct value for Car plat number")
+            showAlert(title: "Empty Credentials", message: "Please enter correct value for Car plate number")
         }
         
         else {
+            
             let email = tfEmail.text!
             
             let newUser = User(id: nil, name: tfName.text!, licensePlateNum: tfCarplateNumber.text!)
@@ -63,14 +67,15 @@ class SignUpViewController: UIViewController {
                 
                 alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { action in
                     
-                    self.navigationController?.popToRootViewController(animated: true)
+                    if let presenter = self.presentingViewController as? SignInViewController {
+                        presenter.email = self.tfEmail.text!
+                        print("returned back the value")
+                        }
                     
-                    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let sign_in_ViewController = storyboard.instantiateViewController(identifier: "sign_in_VC") as! SignInViewController
+                    self.navigationController?.popViewController(animated: true)
+
+                    self.dismiss(animated: true, completion: nil)
                     
-                    sign_in_ViewController.email = email
-                    
-                    self.navigationController?.pushViewController(sign_in_ViewController, animated: true)
                     }))
                 
                 self.present(alert, animated: true, completion: nil)
