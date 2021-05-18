@@ -51,7 +51,7 @@ extension DBHelper
     func addUser(user : User, completion : @escaping (Result) -> Void)
     {
         
-        checkIfUserPresent(mail: user.email) { user, tResult in
+        checkIfUserPresent(mail: user.email) { _, tResult in
             
             if tResult.type != .failure
             {
@@ -174,11 +174,14 @@ extension DBHelper
                 }
                 catch let err
                 {
-                    let result = Result(type: .failure, message: "Error: \(err.localizedDescription)")
-
+                    let result = Result(type: .noConnection, message: "Error: \(err.localizedDescription)")
                     completion(nil, result)
                 }
-                
+            }
+            else
+            {
+                let result = Result(type: .failure, message: "User is Not There")
+                completion(nil, result)
             }
             
         }
