@@ -33,62 +33,174 @@ class DBHelper
         self.firestore = Firestore.firestore()
     }
     
-    //MARK:- Methods to perform FireStore Actions
-    
+
+}
+
+//MARK:- Methods to perform FireStore Actions
+
+
+
+//MARK: User Actions
+
+extension DBHelper
+{
     //TODO:- Constraint Checks should be done within these Functions
     
-    func addUser(user : User) -> Bool
-    {
-        var isAddSuccess = false
-        //Sign up
-        do
-        {
-            let _ = try firestore.collection(USER_ENTITY).addDocument(from: user)
-            isAddSuccess = true
-        }
-        catch let err
-        {
-            print(err)
-        }
-        
-        return isAddSuccess
-    }
+    //MARK: Public Methods
     
-    func getUsers(completion: @escaping (([User]?) -> () ))
+    func addUser(user : User, completion : @escaping (Result) -> Void)
     {
         
-        //Return Users Array if perform Succesfully or return nil
-        firestore.collection(USER_ENTITY).getDocuments { results, err in
+        checkIfUserPresent(mail: user.email) { user, tResult in
             
-            guard err == nil else
+            if tResult.type != .failure
             {
-                print(err.debugDescription)
-                
-                completion(nil)
+                //Means User Exists
+                var temp = tResult
+                temp.type = .failure
+                completion(temp)
                 return
             }
             
-            var users = [User]()
             
-            results?.documents.forEach({ result in
+            var result : Result
+            //Sign up
+            do
+            {
+                let _ = try self.firestore.collection(self.USER_ENTITY).addDocument(from: user)
                 
-                do
-                {
-                    let user = try result.data(as: User.self)
-                    users.append(user!)
-                }
-                catch let err
-                {
-                    print(err)
-                }
-                
-            })
-         
-            completion(users)
+                result = Result(type: .success, message: "User added Successfully")
+            }
+            catch let err
+            {
+                print(err)
+                result = Result(type: .failure, message: "Error While adding User")
+            }
+            
+            completion(result)
+            
+        }
+        
+        
+        
+    }
+    
+    func validateUser(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
+    {
+        checkIfUserPresent(mail: mail) { user, tResult in
+        
+            if tResult.type != .failure
+            {
+                //Means User Exists
+                var temp = tResult
+                temp.type = .failure
+                completion(nil, temp)
+                return
+            }
+            
+            
+            if user?.pwd == pwd
+            {
+                //Success
+                let result = Result(type: .success, message: "User Validation Success")
+                completion(user, result)
+            }
+            else
+            {
+                //Mismatch
+                let result = Result(type: .failure, message: "Error: Username - Password mismatch")
+
+                completion(nil, result)
+            }
         }
     }
     
     
+    func addVehicle(plateNumber : String, user: User, completion : @escaping (Result) -> Void) -> Result
+    {
+        
+        checkLicensePlateNumberExistsInSystem(plateNumber: plateNumber) { tResult in
+            
+            if tResult.type != .failure
+            {
+                var temp = tResult
+                temp.type = .failure
+                //License Plate is already in the system
+                completion(temp)
+            }
+            
+        }
+        
+        var tUser = user
+        tUser.licensePlateNums.append(plateNumber)
+        
+        do
+        {
+            try firestore.collection("Users").document(user.id!).setData(from: tUser)
+            return Result(type: .success, message: "Vehicle Added Successfully")
+            
+        }
+        catch let err
+        {
+            return Result(type: .success, message: "Error : \(err.localizedDescription)")
+        }
+        
+        
+    }
     
+    //MARK: Private Methods
+    private func checkIfUserPresent(mail : String, completion : @escaping (User?,Result) -> ())
+    {
+        firestore.collection(USER_ENTITY).whereField("email", isEqualTo: mail).getDocuments { queryResults, err in
+            
+            
+            if let doc = queryResults?.documents.first
+            {
+                do
+                {
+                    
+                    let user = try doc.data(as: User.self)
+                    let result = Result(type: .success, message: "User Already Exists")
+
+                    completion(user, result)
+                }
+                catch let err
+                {
+                    let result = Result(type: .failure, message: "Error: \(err.localizedDescription)")
+
+                    completion(nil, result)
+                }
+                
+            }
+            
+        }
+    }
+    
+    private func checkLicensePlateNumberExistsInSystem(plateNumber : String, completion : @escaping (Result ) -> Void)
+    {
+        firestore.collection(USER_ENTITY).whereField("licensePlateNum", arrayContains: plateNumber).getDocuments { queryResults, err in
+            
+            if let _ = queryResults?.documents.first
+            {
+                let result = Result(type: .success, message: "License Plate Number Already Exists in the System")
+                completion(result)
+                
+            }
+            else
+            {
+                let result = Result(type: .failure, message: "License Plate Number is Not in Database")
+                
+                completion(result)
+            }
+            
+        }
+    }
+    
+}
+
+//MARK: Parking Actions
+
+extension DBHelper
+{
     
 }

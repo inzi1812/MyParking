@@ -21,6 +21,7 @@
 		C99E929C2651D16E00BB20A9 /* ParkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E929B2651D16E00BB20A9 /* ParkingHours.swift */; };
 		C99E929E2651D2DC00BB20A9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E929D2651D2DC00BB20A9 /* Location.swift */; };
 		C99E92A126520DEE00BB20A9 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92A026520DEE00BB20A9 /* DBHelper.swift */; };
+		C99E92D426541C6F00BB20A9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92D326541C6F00BB20A9 /* Result.swift */; };
 		D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC60FE2650067C00347F70 /* SignUpViewController.swift */; };
 		D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC610026500C9D00347F70 /* SignInViewController.swift */; };
 		D6F5CA5126526E7C00FA7E45 /* ParkingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */; };
@@ -45,6 +46,7 @@
 		C99E929B2651D16E00BB20A9 /* ParkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingHours.swift; sourceTree = "<group>"; };
 		C99E929D2651D2DC00BB20A9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		C99E92A026520DEE00BB20A9 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		C99E92D326541C6F00BB20A9 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		D6BC60FE2650067C00347F70 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D6BC610026500C9D00347F70 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				C99E92992651D0FE00BB20A9 /* Parking.swift */,
 				C99E929B2651D16E00BB20A9 /* ParkingHours.swift */,
 				C99E929D2651D2DC00BB20A9 /* Location.swift */,
+				C99E92D326541C6F00BB20A9 /* Result.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */,
+				C99E92D426541C6F00BB20A9 /* Result.swift in Sources */,
 				D6F5CA5126526E7C00FA7E45 /* ParkingListViewController.swift in Sources */,
 				C96B5EA8264C7AFA003942ED /* ViewController.swift in Sources */,
 				D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */,
