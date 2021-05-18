@@ -89,9 +89,9 @@ extension DBHelper
     {
         checkIfUserPresent(mail: mail) { user, tResult in
         
-            if tResult.type != .failure
+            if tResult.type != .success
             {
-                //Means User Exists
+                //Means User does not exist or error Occured
                 var temp = tResult
                 temp.type = .failure
                 completion(nil, temp)
