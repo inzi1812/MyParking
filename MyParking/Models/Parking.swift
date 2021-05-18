@@ -13,7 +13,6 @@ import FirebaseFirestoreSwift
 struct Parking: Codable {
     @DocumentID var id: String?
     
-    var licensePlateNum : String
     
     var buildingCode : String
     var hostSuitNum : String

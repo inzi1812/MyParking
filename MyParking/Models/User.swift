@@ -9,7 +9,13 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct User: Codable {
-    @DocumentID var id: String?
+        
+    var email : String
+
     var name : String
-    var licensePlateNum : String
+    var cars : [Car]
+    
+    var pwd : String
+    
+    var contactNumber : String? //Optional
 }
