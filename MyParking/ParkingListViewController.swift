@@ -8,22 +8,32 @@
 import UIKit
 
 class ParkingListViewController: UIViewController {
+    
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(btnLogoutPressed))
+        
     }
     
+    @objc func btnLogoutPressed(){
+        
+        defaults.set("", forKey: "email")
+        defaults.set("", forKey: "password")
+        
+        self.navigationController?.popViewController(animated: true)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        self.dismiss(animated: true, completion: nil)
+        
+        
+        
+        print("LOGGED OUT from Parking List Screen")
+        
+        
     }
-    */
 
 }

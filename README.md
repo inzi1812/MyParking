@@ -1,5 +1,30 @@
 # MyParking
 
+Database used: Firebase
+
+Work division:
+
+Front End Development: Rajdeep
+    => Design of all the UI, screens, layout.
+    => Validations.
+    => use of DBHelper method to send & retrieve data to & from the Firebase.
+    
+Back End Development : Inzamam
+    => Setting up Firebase, GoogleService-Info.plist file.
+    => DBHelper file and setting up all the relevant functions as per the project requirement.
+    
+Update (18/05/2021):
+
+1. Sign In Screen is completed with all the validations.
+2. Sign Up Screen is completed with all the validations.
+3. Valid users can log in to the app and will be directly re-directed to the Parking List Screen directly if they have selected "Remember Me" at the time of logging in.
+4. User can logout from the system.
+7. ER diagram updated in the repository.
+5. Pods and Google Plist file is created and updated in the project.
+6. Working video of the app is uploaded to the Github repository.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
 This is an project that is being developed during the assessment of "Advance iOS Development" in the 2nd semester of my "Mobile Application Development and Strategy" program at George Brown College, Toronto. 
 
 The project requiremnts are as stated below.
