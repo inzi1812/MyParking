@@ -13,8 +13,8 @@ class DBHelper
     private static var shared : DBHelper?
     
     
-    let USER_ENTITY = "Users"
-    let PARKING_ENTITY = "Parkings"
+    private let USER_ENTITY = "Users"
+    private let PARKING_ENTITY = "Parkings"
     
     static func getInstance() -> DBHelper
     {
@@ -116,7 +116,7 @@ extension DBHelper
     }
     
     
-    func addVehicle(plateNumber : String, user: User, completion : @escaping (Result) -> Void) -> Result
+    func addVehicle(plateNumber : String, user: User, completion : @escaping (Result) -> Void)
     {
         
         checkLicensePlateNumberExistsInSystem(plateNumber: plateNumber) { tResult in
@@ -127,6 +127,7 @@ extension DBHelper
                 temp.type = .failure
                 //License Plate is already in the system
                 completion(temp)
+                return
             }
             
         }
@@ -140,12 +141,16 @@ extension DBHelper
         do
         {
             try firestore.collection("Users").document(user.email).setData(from: tUser)
-            return Result(type: .success, message: "Vehicle Added Successfully")
+            let result = Result(type: .success, message: "Vehicle Added Successfully")
+            
+            completion(result)
             
         }
         catch let err
         {
-            return Result(type: .success, message: "Error : \(err.localizedDescription)")
+            let result = Result(type: .success, message: "Error : \(err.localizedDescription)")
+            
+            completion(result)
         }
         
         
