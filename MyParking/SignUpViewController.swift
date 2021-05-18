@@ -54,39 +54,44 @@ class SignUpViewController: UIViewController {
             
             let email = tfEmail.text!
             
-            let newUser = User(id: nil, name: tfName.text!, licensePlateNum: tfCarplateNumber.text!)
+//            let car = Car(licensePlateNumber: tfCarplateNumber.text!, parkings: [])
             
-            let isSignUpSuccessful = DBHelper.getInstance().addUser(user: newUser)
+            let newUser = User(email: email, name: tfName.text!, pwd: tfPassword.text!, contactNumber: tfContactNumber.text!)
             
-            if(isSignUpSuccessful){
-                
-//                showAlert(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.")
-                
-               
-                let alert = UIAlertController(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { action in
+            DBHelper.getInstance().addUser(user: newUser) { result in
                     
-                    if let presenter = self.presentingViewController as? SignInViewController {
-                        presenter.email = self.tfEmail.text!
-                        print("returned back the value")
-                        }
+                if result.type == .success {
                     
-                    self.navigationController?.popViewController(animated: true)
+                    self.showAlert(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.")
+                                   
+                                  
+                                   let alert = UIAlertController(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.", preferredStyle: .alert)
+                                   
+                                   alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { action in
+                                       
+                                       if let presenter = self.presentingViewController as? SignInViewController {
+                                           presenter.email = self.tfEmail.text!
+                                           print("returned back the value")
+                                           }
+                                       
+                                       self.navigationController?.popViewController(animated: true)
 
-                    self.dismiss(animated: true, completion: nil)
+                                       self.dismiss(animated: true, completion: nil)
+                                       
+                                       }))
+                                   
+                                   self.present(alert, animated: true, completion: nil)
                     
-                    }))
+                }
                 
-                self.present(alert, animated: true, completion: nil)
-                
+                else{
+                    
+                    self.showAlert(title: "Error", message: result.message)
+                }
                 
             }
             
-            else {
-                
-                showAlert(title: "Sign Up Error", message: "An error occured")
-            }
+        
         }
     
     }
