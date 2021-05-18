@@ -132,11 +132,14 @@ extension DBHelper
         }
         
         var tUser = user
-        tUser.licensePlateNums.append(plateNumber)
+        
+        let car = Car(licensePlateNumber: plateNumber, parkings: [])
+        
+        tUser.cars.append(car)
         
         do
         {
-            try firestore.collection("Users").document(user.id!).setData(from: tUser)
+            try firestore.collection("Users").document(user.email).setData(from: tUser)
             return Result(type: .success, message: "Vehicle Added Successfully")
             
         }
