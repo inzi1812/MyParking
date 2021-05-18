@@ -1,6 +1,7 @@
 # MyParking
 
 Database used: Firebase
+ER diagram link: https://drive.google.com/file/d/18EXLVrPvINUunm0UO69njjVWhpicZyWX/view?usp=sharing
 
 Work division:
 
@@ -19,7 +20,7 @@ Update (18/05/2021):
 2. Sign Up Screen is completed with all the validations.
 3. Valid users can log in to the app and will be directly re-directed to the Parking List Screen directly if they have selected "Remember Me" at the time of logging in.
 4. User can logout from the system.
-7. ER diagram updated in the repository.
+7. ER diagram updated. Link: https://drive.google.com/file/d/18EXLVrPvINUunm0UO69njjVWhpicZyWX/view?usp=sharing
 5. Pods and Google Plist file is created and updated in the project.
 6. Working video of the app is uploaded to the Github repository.
 

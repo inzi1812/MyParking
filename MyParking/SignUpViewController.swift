@@ -69,14 +69,9 @@ class SignUpViewController: UIViewController {
                                    
                                    alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { action in
                                        
-                                       if let presenter = self.presentingViewController as? SignInViewController {
-                                           presenter.email = self.tfEmail.text!
-                                           print("returned back the value")
-                                           }
-                                       
                                        self.navigationController?.popViewController(animated: true)
 
-                                       self.dismiss(animated: true, completion: nil)
+//                                       self.dismiss(animated: true, completion: nil)
                                        
                                        }))
                                    
