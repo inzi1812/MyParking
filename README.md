@@ -28,13 +28,13 @@ Update (18/05/2021):
 
 Firebase:
 
-![Firebase](Screenshots/Screenshot%202021-05-18%20at%208.25.24%20PM.jpg)
+<img src="Screenshots/Screenshot%202021-05-18%20at%208.25.24%20PM.jpg" >
 
 Sign In Page:
 
-![Sign In](Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-05-18%20at%2019.37.30.png)
+<img src="Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-05-18%20at%2019.37.30.png" width="276" height="599" >
 
 Sign up page:
 
-![Sign up](Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-05-18%20at%2019.37.33.png)
+<img src="Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-05-18%20at%2019.37.33.png" width="276" height="599" >
 
