@@ -8,8 +8,6 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-
-    
     
     @IBOutlet weak var tfName: UITextField!
     
@@ -23,31 +21,45 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tfPassword.isSecureTextEntry = true // sets ***** for password input
 
     }
     
-   
-    
     @IBAction func btnSignUpClicked(_ sender: Any) {
         
-        if(tfName.text == ""){
-            showAlert(title: "Empty Credentials", message: "Please enter correct value for username")
+        guard let name = tfName.text, let email = tfEmail.text, let password = tfPassword.text, let contactNumber = tfContactNumber.text, let carPlateNUmber = tfCarplateNumber.text else {
+            
+            print("invalid values for name, email, password, contact number, car plate number fields")
+            return
         }
         
-        else if(tfEmail.text == ""){
-            showAlert(title: "Empty Credentials", message: "Please enter correct value for email")
+        if(name == ""){
+            showAlert(title: "Empty Credentials", message: "Please enter your name")
         }
         
-        else if(tfPassword.text == ""){
-            showAlert(title: "Empty Credentials", message: "Please enter correct value for password")
+        else if(email == ""){
+            showAlert(title: "Empty Credentials", message: "Please enter your email address")
         }
         
-        else if(tfContactNumber.text == ""){
-            showAlert(title: "Empty Credentials", message: "Please enter correct value for contact number")
+        else if(!email.isValidEmail()){
+            showAlert(title: "Invalid Email", message: "Please enter a valid email address")
         }
         
-        else if(tfCarplateNumber.text == ""){
-            showAlert(title: "Empty Credentials", message: "Please enter correct value for Car plate number")
+        else if(password == ""){
+            showAlert(title: "Empty Credentials", message: "Please enter your password")
+        }
+        
+        else if(contactNumber == ""){
+            showAlert(title: "Empty Credentials", message: "Please enter your contact number")
+        }
+        
+        else if(carPlateNUmber == ""){
+            showAlert(title: "Empty Credentials", message: "Please enter your car plate number / license plate number")
+        }
+        
+        else if(!carPlateNUmber.isValidCarPlateNumber()){
+            showAlert(title: "Invalid Car Plate Number", message: "Car Plate Numbers are 2 to 8 letters long")
         }
         
         else {
@@ -61,9 +73,6 @@ class SignUpViewController: UIViewController {
             DBHelper.getInstance().addUser(user: newUser) { result in
                     
                 if result.type == .success {
-                    
-                    self.showAlert(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.")
-                                   
                                   
                                    let alert = UIAlertController(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.", preferredStyle: .alert)
                                    
@@ -99,9 +108,9 @@ class SignUpViewController: UIViewController {
     
     func showAlert(title : String, message : String){
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title.uppercased(), message: message, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
     }

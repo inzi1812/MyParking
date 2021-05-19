@@ -21,6 +21,8 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         
+    tfPassword.isSecureTextEntry = true // sets ***** for password input
+        
     let isUserDefaultsSavedInSystem = checkUserDefaultStatus()
         if(isUserDefaultsSavedInSystem){
             
@@ -34,13 +36,19 @@ class SignInViewController: UIViewController {
     
     @IBAction func btnLoginClicked(_ sender: Any) {
         
-        if(tfEmail.text == ""){
+        guard let email = tfEmail.text, let password = tfPassword.text else{
+            
+            print("invalid values for email and password fields")
+            return
+        }
+        
+        if(email == ""){
             // user did not enter value for username field
             
             showAlert(title: "Empty Credentials", message: "Please enter your username")
         }
         
-        else if (tfPassword.text == ""){
+        else if (password == ""){
         // user did not enter value for password field
             
             showAlert(title: "Empty Credentials", message: "Please enter your password")
@@ -49,26 +57,34 @@ class SignInViewController: UIViewController {
         
         else {
             
-            guard let email = tfEmail.text, let pwd = tfPassword.text else {
-                
-                print("invalid values for username and password fields")
-                return
-            }
-            
-            if(switchRememberMe.isOn) {
-                
-                defaults.set(email, forKey: "email")
-                defaults.set(pwd, forKey: "password")
-                
-            }
-            
-            // clear the fields of the username and the password and reset the switch
-            
-            tfEmail.text = ""
-            tfPassword.text = ""
-            switchRememberMe.setOn(false, animated: true)
-            
             navigateToParkingListScreen()
+            
+            DBHelper.getInstance().validateUser(mail: email, pwd: password) { user, result in
+                    
+                if result.type == .success{
+                    
+                    if(self.switchRememberMe.isOn) {
+                        
+                        self.defaults.set(email, forKey: "email")
+                        self.defaults.set(password, forKey: "password")
+                        
+                    }
+                    
+                    // clear the fields of the username and the password and reset the switch
+                    
+                    self.tfEmail.text = ""
+                    self.tfPassword.text = ""
+                    self.switchRememberMe.setOn(false, animated: true)
+                    
+                    self.navigateToParkingListScreen()
+                    
+                }
+                
+                else {
+                    
+                    self.showAlert(title: "Error", message: result.message)
+                }
+            }
             
             
         }
@@ -96,36 +112,23 @@ class SignInViewController: UIViewController {
     }
     
     func checkUserDefaultStatus() -> Bool {
-        
-        // checks whether the user is saved or not in User Defaults ..
-        // if the user is saved, then load the saved username and password in the respective fields and set Remember Me switch to on
+        // checks whether the user is saved or not in User Defaults..
         
         if(defaults.string(forKey: "email") != ""){ // there exists a user who selected Remember Me
-            
-//            tfEmail.text = defaults.string(forKey: "email")
-//            tfPassword.text = defaults.string(forKey: "password")
-//
-//            switchRememberMe.setOn(true, animated: true)
             
             return true
         }
         
         else {
             
-            
-//            tfEmail.text = ""
-//            tfEmail.text = ""
-//            switchRememberMe.setOn(false, animated: true)
-            
             return false
         }
-        
     }
     
     
     func showAlert(title : String, message : String){
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title.uppercased(), message: message, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
