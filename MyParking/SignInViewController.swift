@@ -56,9 +56,7 @@ class SignInViewController: UIViewController {
         }
         
         else {
-            
-            navigateToParkingListScreen()
-            
+                    
             DBHelper.getInstance().validateUser(mail: email, pwd: password) { user, result in
                     
                 if result.type == .success{
