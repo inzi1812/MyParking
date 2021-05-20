@@ -128,6 +128,27 @@ extension DBHelper
         
     }
     
+    func getParkings(forUser user : User, completion: @escaping([Parking]?, Result) -> Void)
+    {
+        checkNetworkConnection { isConnected in
+            
+            if isConnected
+            {
+                //Connected to Internet
+              
+                
+            }
+            else
+            {
+                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+                
+                completion(nil,result)
+            }
+            
+        }
+    }
+    
+    
     
     //MARK: Network Mehods
     private func checkNetworkConnection(completion: @escaping (Bool) -> Void)
@@ -312,6 +333,44 @@ extension DBHelper
             completion(result)
         }
         
+    }
+    
+    
+    private func getParkingsFromFireStore(forUser user : User, completion: @escaping([Parking]?, Result) -> Void)
+    {
+        
+        let platenumbers = user.cars.map({ $0.licensePlateNumber })
+        
+        firestore.collection(USER_ENTITY).whereField("licensePlateNumber", arrayContains: platenumbers).order(by: "dateOfParking",descending: true).getDocuments { queryResults, err in
+            
+            
+            guard err == nil else
+            {
+                completion(nil, Result(type: .failure, message: "Error: \(err!.localizedDescription)"))
+                return
+            }
+            
+            var parkings = [Parking]()
+            
+            queryResults?.documents.forEach({ document in
+                
+                do
+                {
+                   let parking = try document.data(as: Parking.self)
+                    parkings.append(parking!)
+                }
+                catch let err
+                {
+                    print(err.localizedDescription)
+                    
+                    completion(nil, Result(type: .failure, message: "Error Getting Parking \(err.localizedDescription)"))
+                    return
+                }
+                
+                completion(parkings, Result(type: .success, message: "Parkings are retrieved Succesfully"))
+            })
+            
+        }
     }
     
 }

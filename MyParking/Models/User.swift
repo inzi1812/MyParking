@@ -19,5 +19,4 @@ struct User: Codable {
     
     var contactNumber : String? //Optional
     
-    var isActive : Bool = true
 }
