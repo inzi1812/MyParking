@@ -22,6 +22,7 @@
 		C99E92A126520DEE00BB20A9 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92A026520DEE00BB20A9 /* DBHelper.swift */; };
 		C99E92D426541C6F00BB20A9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92D326541C6F00BB20A9 /* Result.swift */; };
 		C99E92D626543FFA00BB20A9 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92D526543FFA00BB20A9 /* Car.swift */; };
+		D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */; };
 		D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC60FE2650067C00347F70 /* SignUpViewController.swift */; };
 		D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC610026500C9D00347F70 /* SignInViewController.swift */; };
 		D6F5CA5126526E7C00FA7E45 /* ParkingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */; };
@@ -48,6 +49,7 @@
 		C99E92A026520DEE00BB20A9 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		C99E92D326541C6F00BB20A9 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		C99E92D526543FFA00BB20A9 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListTableViewController.swift; sourceTree = "<group>"; };
 		D6BC60FE2650067C00347F70 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D6BC610026500C9D00347F70 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListViewController.swift; sourceTree = "<group>"; };
@@ -104,13 +106,11 @@
 		C96B5EA2264C7AFA003942ED /* MyParking */ = {
 			isa = PBXGroup;
 			children = (
+				D61B75C5265707A6000D1E03 /* Controller */,
 				C99E929F26520DCE00BB20A9 /* Database Helper */,
 				C99E92962650E56700BB20A9 /* Models */,
 				C96B5EA3264C7AFA003942ED /* AppDelegate.swift */,
 				C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */,
-				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
-				D6BC60FE2650067C00347F70 /* SignUpViewController.swift */,
-				D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */,
 				C96B5EA9264C7AFA003942ED /* Main.storyboard */,
 				C96B5EAF264C7AFB003942ED /* Assets.xcassets */,
 				C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */,
@@ -141,6 +141,17 @@
 				C99E92A026520DEE00BB20A9 /* DBHelper.swift */,
 			);
 			path = "Database Helper";
+			sourceTree = "<group>";
+		};
+		D61B75C5265707A6000D1E03 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */,
+				D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */,
+				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
+				D6BC60FE2650067C00347F70 /* SignUpViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +276,7 @@
 				C99E929E2651D2DC00BB20A9 /* Location.swift in Sources */,
 				C99E929C2651D16E00BB20A9 /* ParkingHours.swift in Sources */,
 				C99E92A126520DEE00BB20A9 /* DBHelper.swift in Sources */,
+				D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */,
 				C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */,
 				D6FBA8F42654433100B9CCE6 /* Extensions.swift in Sources */,
 				C99E92982650E57400BB20A9 /* User.swift in Sources */,

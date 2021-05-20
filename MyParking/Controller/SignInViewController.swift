@@ -45,7 +45,7 @@ class SignInViewController: UIViewController {
         if(email == ""){
             // user did not enter value for username field
             
-            showAlert(title: "Empty Credentials", message: "Please enter your username")
+            showAlert(title: "Empty Credentials", message: "Please enter your email")
         }
         
         else if (password == ""){
@@ -92,7 +92,7 @@ class SignInViewController: UIViewController {
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let parking_list_ViewController = storyboard.instantiateViewController(identifier: "parking_list_ViewController") as! ParkingListViewController
+        let parking_list_ViewController = storyboard.instantiateViewController(identifier: "parkingList_VC2") as! ParkingListTableViewController
         
         self.navigationController?.pushViewController(parking_list_ViewController, animated: true)
         
