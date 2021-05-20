@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import Network
 
 class DBHelper
 {
@@ -28,15 +29,22 @@ class DBHelper
     
     private var firestore : Firestore
     
+    
+    private let networkMonitor : NWPathMonitor
+    private let queue = DispatchQueue(label: "Monitor")
+    
     private init() {
         
         self.firestore = Firestore.firestore()
+        
+        self.networkMonitor = NWPathMonitor()
+        
+        networkMonitor.start(queue: queue)
+        
     }
     
 
 }
-
-//MARK:- Methods to perform FireStore Actions
 
 
 
@@ -44,14 +52,110 @@ class DBHelper
 
 extension DBHelper
 {
-    //TODO:- Constraint Checks should be done within these Functions
     
     //MARK: Public Methods
     
     func addUser(user : User, completion : @escaping (Result) -> Void)
     {
         
-        checkIfUserPresent(mail: user.email) { _, tResult in
+        checkNetworkConnection { isConnected in
+            
+            if isConnected
+            {
+                //Connected to Internet
+                self.addUserToFireStore(user: user) { tResult in
+                    completion(tResult)
+                    
+                }
+            }
+            else
+            {
+                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+                
+                completion(result)
+            }
+            
+        }
+       
+    }
+    
+    func validateUser(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
+    {
+        checkNetworkConnection { isConnected in
+            
+            if isConnected
+            {
+                //Connected to Internet
+                self.validateUserWithFireStore(mail: mail, pwd: pwd) { tUser, tResult in
+                    
+                    completion(tUser, tResult)
+                    
+                }
+            }
+            else
+            {
+                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+                
+                completion(nil,result)
+            }
+            
+        }
+    }
+    
+    func addVehicle(plateNumber : String, user: User, completion : @escaping (Result) -> Void)
+    {
+        
+        checkNetworkConnection { isConnected in
+            
+            if isConnected
+            {
+                //Connected to Internet
+                self.addVehicleinFirestore(plateNumber: plateNumber, user: user) { tResult in
+                    
+                    completion(tResult)
+                }
+                
+            }
+            else
+            {
+                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+                
+                completion(result)
+            }
+            
+        }
+
+        
+    }
+    
+    
+    //MARK: Network Mehods
+    private func checkNetworkConnection(completion: @escaping (Bool) -> Void)
+    {
+        if networkMonitor.currentPath.status == .satisfied
+        {
+            completion(true)
+        }
+        else
+        {
+            completion(false)
+        }
+    }
+    
+}
+
+
+//MARK: FiresStore Private Methods
+
+extension DBHelper
+{
+    //MARK: Private Methods
+
+    
+    private func addUserToFireStore(user : User, completion : @escaping (Result) -> Void)
+    {
+        
+        checkIfUserPresentinFireStore(mail: user.email) { _, tResult in
             
             if tResult.type != .failure
             {
@@ -85,9 +189,11 @@ extension DBHelper
         
     }
     
-    func validateUser(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
+
+    
+    private func validateUserWithFireStore(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
     {
-        checkIfUserPresent(mail: mail) { user, tResult in
+        checkIfUserPresentinFireStore(mail: mail) { user, tResult in
         
             if tResult.type != .success
             {
@@ -116,10 +222,63 @@ extension DBHelper
     }
     
     
-    func addVehicle(plateNumber : String, user: User, completion : @escaping (Result) -> Void)
+
+    
+    private func checkIfUserPresentinFireStore(mail : String, completion : @escaping (User?,Result) -> ())
+    {
+        firestore.collection(USER_ENTITY).whereField("email", isEqualTo: mail).getDocuments { queryResults, err in
+            
+            
+            if let doc = queryResults?.documents.first
+            {
+                do
+                {
+                    
+                    let user = try doc.data(as: User.self)
+                    let result = Result(type: .success, message: "User Already Exists")
+
+                    completion(user, result)
+                }
+                catch let err
+                {
+                    let result = Result(type: .noConnection, message: "Error: \(err.localizedDescription)")
+                    completion(nil, result)
+                }
+            }
+            else
+            {
+                let result = Result(type: .failure, message: "User is Not There")
+                completion(nil, result)
+            }
+            
+        }
+    }
+    
+    private func checkLicensePlateNumberExistsInFirestore(plateNumber : String, completion : @escaping (Result ) -> Void)
+    {
+        firestore.collection(USER_ENTITY).whereField("licensePlateNum", arrayContains: plateNumber).getDocuments { queryResults, err in
+            
+            if let _ = queryResults?.documents.first
+            {
+                let result = Result(type: .success, message: "License Plate Number Already Exists in the System")
+                completion(result)
+                
+            }
+            else
+            {
+                let result = Result(type: .failure, message: "License Plate Number is Not in Database")
+                
+                completion(result)
+            }
+            
+        }
+    }
+    
+    
+    private func addVehicleinFirestore(plateNumber : String, user: User, completion : @escaping (Result) -> Void)
     {
         
-        checkLicensePlateNumberExistsInSystem(plateNumber: plateNumber) { tResult in
+        checkLicensePlateNumberExistsInFirestore(plateNumber: plateNumber) { tResult in
             
             if tResult.type != .failure
             {
@@ -153,65 +312,6 @@ extension DBHelper
             completion(result)
         }
         
-        
     }
-    
-    //MARK: Private Methods
-    private func checkIfUserPresent(mail : String, completion : @escaping (User?,Result) -> ())
-    {
-        firestore.collection(USER_ENTITY).whereField("email", isEqualTo: mail).getDocuments { queryResults, err in
-            
-            
-            if let doc = queryResults?.documents.first
-            {
-                do
-                {
-                    
-                    let user = try doc.data(as: User.self)
-                    let result = Result(type: .success, message: "User Already Exists")
-
-                    completion(user, result)
-                }
-                catch let err
-                {
-                    let result = Result(type: .noConnection, message: "Error: \(err.localizedDescription)")
-                    completion(nil, result)
-                }
-            }
-            else
-            {
-                let result = Result(type: .failure, message: "User is Not There")
-                completion(nil, result)
-            }
-            
-        }
-    }
-    
-    private func checkLicensePlateNumberExistsInSystem(plateNumber : String, completion : @escaping (Result ) -> Void)
-    {
-        firestore.collection(USER_ENTITY).whereField("licensePlateNum", arrayContains: plateNumber).getDocuments { queryResults, err in
-            
-            if let _ = queryResults?.documents.first
-            {
-                let result = Result(type: .success, message: "License Plate Number Already Exists in the System")
-                completion(result)
-                
-            }
-            else
-            {
-                let result = Result(type: .failure, message: "License Plate Number is Not in Database")
-                
-                completion(result)
-            }
-            
-        }
-    }
-    
-}
-
-//MARK: Parking Actions
-
-extension DBHelper
-{
     
 }
