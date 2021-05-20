@@ -217,7 +217,7 @@
         <!--Parking List Table View Controller-->
         <scene sceneID="Dhb-5I-U5L">
             <objects>
-                <tableViewController storyboardIdentifier="parkingList_VC2" id="Knm-Aa-7rd" customClass="ParkingListTableViewController" customModule="MyParking" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="parkingList_VC" id="Knm-Aa-7rd" customClass="ParkingListTableViewController" customModule="MyParking" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rlE-xD-ytn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,30 +250,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCU-Vy-rIA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3708.6956521739135" y="-174.10714285714286"/>
-        </scene>
-        <!--Parking List View Controller-->
-        <scene sceneID="iVX-jq-uz0">
-            <objects>
-                <viewController storyboardIdentifier="parking_list_ViewController" id="CLN-o3-38P" customClass="ParkingListViewController" customModule="MyParking" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="axy-PE-KYg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No parkings exist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="We4-Cl-8Pr">
-                                <rect key="frame" x="114" y="94" width="186" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="jLd-do-69E"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CmH-5i-KGy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4425" y="-175"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IHm-Yh-Nzo">

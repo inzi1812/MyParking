@@ -92,7 +92,7 @@ class SignInViewController: UIViewController {
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let parking_list_ViewController = storyboard.instantiateViewController(identifier: "parkingList_VC2") as! ParkingListTableViewController
+        let parking_list_ViewController = storyboard.instantiateViewController(identifier: "parkingList_VC") as! ParkingListTableViewController
         
         self.navigationController?.pushViewController(parking_list_ViewController, animated: true)
         

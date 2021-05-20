@@ -25,7 +25,6 @@
 		D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */; };
 		D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC60FE2650067C00347F70 /* SignUpViewController.swift */; };
 		D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC610026500C9D00347F70 /* SignInViewController.swift */; };
-		D6F5CA5126526E7C00FA7E45 /* ParkingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */; };
 		D6FBA8F42654433100B9CCE6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FBA8F32654433100B9CCE6 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +51,6 @@
 		D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListTableViewController.swift; sourceTree = "<group>"; };
 		D6BC60FE2650067C00347F70 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D6BC610026500C9D00347F70 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListViewController.swift; sourceTree = "<group>"; };
 		D6FBA8F32654433100B9CCE6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,7 +144,6 @@
 		D61B75C5265707A6000D1E03 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D6F5CA5026526E7C00FA7E45 /* ParkingListViewController.swift */,
 				D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */,
 				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
 				D6BC60FE2650067C00347F70 /* SignUpViewController.swift */,
@@ -271,7 +268,6 @@
 			files = (
 				C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */,
 				C99E92D426541C6F00BB20A9 /* Result.swift in Sources */,
-				D6F5CA5126526E7C00FA7E45 /* ParkingListViewController.swift in Sources */,
 				D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */,
 				C99E929E2651D2DC00BB20A9 /* Location.swift in Sources */,
 				C99E929C2651D16E00BB20A9 /* ParkingHours.swift in Sources */,
