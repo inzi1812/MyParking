@@ -8,9 +8,11 @@
 import Foundation
 import FirebaseFirestoreSwift
 
+
 struct Parking: Codable {
-    
     @DocumentID var id: String?
+    
+    var licensePlateNumber : String
     
     var buildingCode : String
     var hostSuitNum : String
@@ -18,6 +20,5 @@ struct Parking: Codable {
     var parkingHours : ParkingHour
     var location : Location
     
-    var timeOfParking : Date
-
+    var dateOfParking : Date
 }

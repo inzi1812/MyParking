@@ -18,4 +18,5 @@ struct User: Codable {
     var pwd : String
     
     var contactNumber : String? //Optional
+    
 }

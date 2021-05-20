@@ -14,6 +14,8 @@
 		C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C96B5EAC264C7AFA003942ED /* MyParking.xcdatamodeld */; };
 		C96B5EB0264C7AFB003942ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EAF264C7AFB003942ED /* Assets.xcassets */; };
 		C96B5EB3264C7AFB003942ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */; };
+		C9808A972656D21600E40954 /* AddParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9808A962656D21600E40954 /* AddParkingVC.swift */; };
+		C9808A9B2656F68700E40954 /* PickListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9808A9A2656F68700E40954 /* PickListViewController.swift */; };
 		C99E928F265045F800BB20A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C99E928E265045F800BB20A9 /* GoogleService-Info.plist */; };
 		C99E92982650E57400BB20A9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92972650E57400BB20A9 /* User.swift */; };
 		C99E929A2651D0FE00BB20A9 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92992651D0FE00BB20A9 /* Parking.swift */; };
@@ -40,6 +42,8 @@
 		C96B5EAF264C7AFB003942ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C96B5EB2264C7AFB003942ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C96B5EB4264C7AFB003942ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9808A962656D21600E40954 /* AddParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParkingVC.swift; sourceTree = "<group>"; };
+		C9808A9A2656F68700E40954 /* PickListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickListViewController.swift; sourceTree = "<group>"; };
 		C99E928E265045F800BB20A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C99E92972650E57400BB20A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C99E92992651D0FE00BB20A9 /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 				D61B75C5265707A6000D1E03 /* Controller */,
 				C99E929F26520DCE00BB20A9 /* Database Helper */,
 				C99E92962650E56700BB20A9 /* Models */,
+				C9808A942656D1CA00E40954 /* View Controller */,
 				C96B5EA3264C7AFA003942ED /* AppDelegate.swift */,
 				C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */,
 				C96B5EA9264C7AFA003942ED /* Main.storyboard */,
@@ -118,6 +123,15 @@
 				D6FBA8F32654433100B9CCE6 /* Extensions.swift */,
 			);
 			path = MyParking;
+			sourceTree = "<group>";
+		};
+		C9808A942656D1CA00E40954 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C9808A962656D21600E40954 /* AddParkingVC.swift */,
+				C9808A9A2656F68700E40954 /* PickListViewController.swift */,
+			);
+			path = "View Controller";
 			sourceTree = "<group>";
 		};
 		C99E92962650E56700BB20A9 /* Models */ = {
@@ -275,7 +289,9 @@
 				D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */,
 				C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */,
 				D6FBA8F42654433100B9CCE6 /* Extensions.swift in Sources */,
+				C9808A9B2656F68700E40954 /* PickListViewController.swift in Sources */,
 				C99E92982650E57400BB20A9 /* User.swift in Sources */,
+				C9808A972656D21600E40954 /* AddParkingVC.swift in Sources */,
 				C99E929A2651D0FE00BB20A9 /* Parking.swift in Sources */,
 				C96B5EA6264C7AFA003942ED /* SceneDelegate.swift in Sources */,
 				C99E92D626543FFA00BB20A9 /* Car.swift in Sources */,
