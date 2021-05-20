@@ -136,6 +136,11 @@ extension DBHelper
             {
                 //Connected to Internet
               
+                self.getParkingsFromFireStore(forUser: user) { tParkings, result in
+                    
+                    completion(tParkings,result)
+                    
+                }
                 
             }
             else
