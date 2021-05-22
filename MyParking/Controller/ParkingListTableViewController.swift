@@ -22,14 +22,20 @@ class ParkingListTableViewController: UITableViewController {
     
     @objc func btnLogoutPressed(){
         
-        defaults.set("", forKey: "email")
-        defaults.set("", forKey: "password")
+//        defaults.set("", forKey: "email")
+//        defaults.set("", forKey: "password")
+//
+//        self.navigationController?.popViewController(animated: true)
+//
+//        self.dismiss(animated: true, completion: nil)
+//
+//        print("LOGGED OUT from Parking List Screen")
         
-        self.navigationController?.popViewController(animated: true)
-
-        self.dismiss(animated: true, completion: nil)
         
-        print("LOGGED OUT from Parking List Screen")
+        
+        let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AddParkingVC") as! AddParkingVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
 

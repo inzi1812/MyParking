@@ -66,7 +66,7 @@ class SignUpViewController: UIViewController {
             
             let email = tfEmail.text!
             
-            let car = Car(licensePlateNumber: tfCarplateNumber.text!, parkings: [])
+            let car = Car(licensePlateNumber: tfCarplateNumber.text!)
             
             let newUser = User(email: email, name: tfName.text!, cars: [car], pwd: tfPassword.text!, contactNumber: tfContactNumber.text!)
             

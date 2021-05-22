@@ -9,6 +9,11 @@ import Foundation
 
 extension String {
     
+    
+    var isAlphanumeric: Bool {
+            return !isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+        }
+    
     func isValidEmail() -> Bool {
         // here, `try!` will always succeed because the pattern is valid
         
@@ -18,8 +23,34 @@ extension String {
     
     func isValidCarPlateNumber() -> Bool {
        
+        if !isAlphanumeric
+        {
+            return false
+        }
         
         if(self.count >= 2 && self.count <= 8){
+            
+            return true
+        }
+        
+        else {
+            return false
+        }
+    }
+    
+    func isValidBuildingCode() -> Bool
+    {
+        return (isAlphanumeric && self.count == 5)
+    }
+    
+    func isValidHostSuiteNum() -> Bool
+    {
+        if !isAlphanumeric
+        {
+            return false
+        }
+        
+        if(self.count >= 2 && self.count <= 5){
             
             return true
         }

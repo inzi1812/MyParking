@@ -8,11 +8,11 @@
 import Foundation
 
 
-enum ResultType
+enum ResultType : String
 {
-    case success
-    case failure
-    case noConnection
+    case success = "Success"
+    case failure = "Failure"
+    case noConnection = "No Internet Connection"
 }
 
 struct Result {

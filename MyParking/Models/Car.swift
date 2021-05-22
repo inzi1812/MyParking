@@ -10,6 +10,6 @@ import Foundation
 
 struct Car: Codable {
     
+    var carName : String = ""
     var licensePlateNumber : String
-    var parkings : [Parking]
 }

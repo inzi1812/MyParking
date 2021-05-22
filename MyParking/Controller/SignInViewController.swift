@@ -112,7 +112,7 @@ class SignInViewController: UIViewController {
     func checkUserDefaultStatus() -> Bool {
         // checks whether the user is saved or not in User Defaults..
         
-        if(defaults.string(forKey: "email") != ""){ // there exists a user who selected Remember Me
+        if(defaults.string(forKey: "email") != nil){ // there exists a user who selected Remember Me
             
             return true
         }

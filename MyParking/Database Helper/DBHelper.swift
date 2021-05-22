@@ -33,11 +33,24 @@ class DBHelper
     private let networkMonitor : NWPathMonitor
     private let queue = DispatchQueue(label: "Monitor")
     
+    private var isNetworkConnected : NetworkStatus = .connected
+    
     private init() {
         
         self.firestore = Firestore.firestore()
         
         self.networkMonitor = NWPathMonitor()
+        
+        networkMonitor.pathUpdateHandler = { (path) in
+            if let statusConnected: NetworkStatus = path.status == .satisfied ? .connected : .disconnected
+            {
+                if self.isNetworkConnected != statusConnected
+                {
+                    self.isNetworkConnected = statusConnected
+                }
+            }
+        }
+
         
         networkMonitor.start(queue: queue)
         
@@ -58,114 +71,117 @@ extension DBHelper
     func addUser(user : User, completion : @escaping (Result) -> Void)
     {
         
-        checkNetworkConnection { isConnected in
-            
-            if isConnected
-            {
-                //Connected to Internet
-                self.addUserToFireStore(user: user) { tResult in
-                    completion(tResult)
-                    
-                }
-            }
-            else
-            {
-                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+        
+        if checkNetworkConnection()
+        {
+            //Connected to Internet
+            self.addUserToFireStore(user: user) { tResult in
+                completion(tResult)
                 
-                completion(result)
             }
-            
         }
+        else
+        {
+            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            
+            completion(result)
+        }
+        
        
     }
     
     func validateUser(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
     {
-        checkNetworkConnection { isConnected in
-            
-            if isConnected
-            {
-                //Connected to Internet
-                self.validateUserWithFireStore(mail: mail, pwd: pwd) { tUser, tResult in
-                    
-                    completion(tUser, tResult)
-                    
-                }
-            }
-            else
-            {
-                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+        
+        if checkNetworkConnection()
+        {
+            //Connected to Internet
+            self.validateUserWithFireStore(mail: mail, pwd: pwd) { tUser, tResult in
                 
-                completion(nil,result)
+                completion(tUser, tResult)
+                
             }
-            
         }
+        else
+        {
+            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            
+            completion(nil,result)
+        }
+        
     }
     
     func addVehicle(plateNumber : String, user: User, completion : @escaping (Result) -> Void)
     {
         
-        checkNetworkConnection { isConnected in
+        if checkNetworkConnection()
+        {
             
-            if isConnected
-            {
-                //Connected to Internet
-                self.addVehicleinFirestore(plateNumber: plateNumber, user: user) { tResult in
-                    
-                    completion(tResult)
-                }
+            //Connected to Internet
+            self.addVehicleinFirestore(plateNumber: plateNumber, user: user) { tResult in
                 
-            }
-            else
-            {
-                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
-                
-                completion(result)
+                completion(tResult)
             }
             
         }
+        else
+        {
+            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            
+            completion(result)
+        }
+        
+        
 
         
     }
     
     func getParkings(forUser user : User, completion: @escaping([Parking]?, Result) -> Void)
     {
-        checkNetworkConnection { isConnected in
+        
+        if checkNetworkConnection()
+        {
+            //Connected to Internet
             
-            if isConnected
-            {
-                //Connected to Internet
-              
-                self.getParkingsFromFireStore(forUser: user) { tParkings, result in
-                    
-                    completion(tParkings,result)
-                    
-                }
+            self.getParkingsFromFireStore(forUser: user) { tParkings, result in
+                
+                completion(tParkings,result)
                 
             }
-            else
-            {
-                let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
-                
-                completion(nil,result)
-            }
             
+        }
+        else
+        {
+            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            
+            completion(nil,result)
+        }
+        
+    }
+    
+    
+    func addParking(parking: Parking) -> Result
+    {
+        if checkNetworkConnection()
+        {
+            return self.addParkingToFireStore(parking: parking)
+        }
+        else
+        {
+            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            
+            return result
         }
     }
     
     
     
     //MARK: Network Mehods
-    private func checkNetworkConnection(completion: @escaping (Bool) -> Void)
+    private func checkNetworkConnection() -> Bool
     {
-        if networkMonitor.currentPath.status == .satisfied
-        {
-            completion(true)
-        }
-        else
-        {
-            completion(false)
-        }
+        
+        return isNetworkConnected == .connected
+        
     }
     
 }
@@ -214,8 +230,6 @@ extension DBHelper
         
         
     }
-    
-
     
     private func validateUserWithFireStore(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
     {
@@ -267,7 +281,7 @@ extension DBHelper
                 }
                 catch let err
                 {
-                    let result = Result(type: .noConnection, message: "Error: \(err.localizedDescription)")
+                    let result = Result(type: .failure, message: "Error: \(err.localizedDescription)")
                     completion(nil, result)
                 }
             }
@@ -319,13 +333,13 @@ extension DBHelper
         
         var tUser = user
         
-        let car = Car(licensePlateNumber: plateNumber, parkings: [])
+        let car = Car(licensePlateNumber: plateNumber)
         
         tUser.cars.append(car)
         
         do
         {
-            try firestore.collection("Users").document(user.email).setData(from: tUser)
+            try firestore.collection(USER_ENTITY).document(user.email).setData(from: tUser)
             let result = Result(type: .success, message: "Vehicle Added Successfully")
             
             completion(result)
@@ -378,4 +392,33 @@ extension DBHelper
         }
     }
     
+    
+    
+    private func addParkingToFireStore(parking: Parking) -> Result
+    {
+        var result : Result
+        //Sign up
+        do
+        {
+            let _ = try self.firestore.collection(self.PARKING_ENTITY).addDocument(from: parking)
+            
+            result = Result(type: .success, message: "Parking added Successfully")
+        }
+        catch let err
+        {
+            print(err)
+            result = Result(type: .failure, message: "Error While adding Parking")
+        }
+        
+        return result
+
+    }
+}
+
+
+
+enum NetworkStatus
+{
+    case connected
+    case disconnected
 }
