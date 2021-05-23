@@ -23,7 +23,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         tfPassword.isSecureTextEntry = true // sets ***** for password input
-
+        
     }
     
     @IBAction func btnSignUpClicked(_ sender: Any) {

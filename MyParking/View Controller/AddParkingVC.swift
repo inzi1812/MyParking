@@ -279,9 +279,7 @@ class AddParkingVC: UIViewController {
         
         self.present(actionSheet, animated: true, completion: nil)
         
-        
     }
-    
     
     @objc func selectCarAreaTapped(gesture: UITapGestureRecognizer)
     {
@@ -289,12 +287,10 @@ class AddParkingVC: UIViewController {
 
         let tTitle = "Select Car"
         let mes = "Select the car for parking"
-
         
         let actionSheet = UIAlertController(title: tTitle, message: mes, preferredStyle: .actionSheet)
         
         let cars = [Car(licensePlateNumber: "123")] //self.user.cars
-        
         
         for element in cars
         {
@@ -314,7 +310,6 @@ class AddParkingVC: UIViewController {
         
         self.present(actionSheet, animated: true, completion: nil)
     }
-    
     
 }
 

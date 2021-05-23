@@ -18,6 +18,7 @@ class SignInViewController: UIViewController {
     let defaults = UserDefaults.standard
     
     var email : String = ""
+    var currentUser = User(email: "", name: "", cars: [], pwd: "", contactNumber: "")
     
     override func viewDidLoad() {
         
@@ -61,10 +62,11 @@ class SignInViewController: UIViewController {
                     
                 if result.type == .success{
                     
+                    self.currentUser = user!
+                    
                     if(self.switchRememberMe.isOn) {
                         
                         self.defaults.set(email, forKey: "email")
-                        self.defaults.set(password, forKey: "password")
                         
                     }
                     
@@ -94,6 +96,7 @@ class SignInViewController: UIViewController {
         
         let parking_list_ViewController = storyboard.instantiateViewController(identifier: "parkingList_VC") as! ParkingListTableViewController
         
+        parking_list_ViewController.currentUser = currentUser
         self.navigationController?.pushViewController(parking_list_ViewController, animated: true)
         
     }

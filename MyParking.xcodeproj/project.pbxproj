@@ -24,6 +24,7 @@
 		C99E92D426541C6F00BB20A9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92D326541C6F00BB20A9 /* Result.swift */; };
 		C99E92D626543FFA00BB20A9 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92D526543FFA00BB20A9 /* Car.swift */; };
 		D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */; };
+		D62FFB0A2659BBAF00C27DA1 /* ParkingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62FFB092659BBAF00C27DA1 /* ParkingListCell.swift */; };
 		D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC60FE2650067C00347F70 /* SignUpViewController.swift */; };
 		D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC610026500C9D00347F70 /* SignInViewController.swift */; };
 		D6FBA8F42654433100B9CCE6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FBA8F32654433100B9CCE6 /* Extensions.swift */; };
@@ -51,6 +52,7 @@
 		C99E92D326541C6F00BB20A9 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		C99E92D526543FFA00BB20A9 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListTableViewController.swift; sourceTree = "<group>"; };
+		D62FFB092659BBAF00C27DA1 /* ParkingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListCell.swift; sourceTree = "<group>"; };
 		D6BC60FE2650067C00347F70 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D6BC610026500C9D00347F70 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D6FBA8F32654433100B9CCE6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */,
 				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
 				D6BC60FE2650067C00347F70 /* SignUpViewController.swift */,
+				D62FFB092659BBAF00C27DA1 /* ParkingListCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				C99E92A126520DEE00BB20A9 /* DBHelper.swift in Sources */,
 				D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */,
 				C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */,
+				D62FFB0A2659BBAF00C27DA1 /* ParkingListCell.swift in Sources */,
 				D6FBA8F42654433100B9CCE6 /* Extensions.swift in Sources */,
 				C99E92982650E57400BB20A9 /* User.swift in Sources */,
 				C9808A972656D21600E40954 /* AddParkingVC.swift in Sources */,
