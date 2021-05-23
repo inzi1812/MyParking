@@ -21,9 +21,9 @@ class ParkingListTableViewController: UITableViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add Parking", style: .plain, target: self, action: #selector(navigateToAddParkingScreen))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Parking", style: .plain, target: self, action: #selector(navigateToAddParkingScreen))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(btnLogoutPressed))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(btnLogoutPressed))
         
         getAllParkings()
         
@@ -57,7 +57,7 @@ class ParkingListTableViewController: UITableViewController {
         
         DBHelper.getInstance().getParkings(forUser: currentUser) { parkingList, result in
             
-//            self.listOfAllParkings = parkingList!
+            self.listOfAllParkings = parkingList!
         
             
         }
@@ -72,17 +72,17 @@ class ParkingListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return self.listOfAllParkings.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "parkingListCell", for: indexPath) as! ParkingListCell
         
-//        cell.tfCarPlateNumber.text = self.listOfAllParkings[indexPath.row].licensePlateNumber
-//        cell.tfBuildingCode.text = self.listOfAllParkings[indexPath.row].buildingCode
-//        cell.tfHostSuitNo.text = self.listOfAllParkings[indexPath.row].hostSuitNum
-//        cell.tfParkingHours.text = self.listOfAllParkings[indexPath.row].parkingHours.stringValue()
+        cell.tfCarPlateNumber.text = self.listOfAllParkings[indexPath.row].licensePlateNumber
+        cell.tfBuildingCode.text = self.listOfAllParkings[indexPath.row].buildingCode
+        cell.tfHostSuitNo.text = self.listOfAllParkings[indexPath.row].hostSuitNum
+        cell.tfParkingHours.text = self.listOfAllParkings[indexPath.row].parkingHours.stringValue()
         
         if(indexPath.row % 2 == 0 ) {
             

@@ -436,7 +436,7 @@
                 <tapGestureRecognizer id="vYe-VS-MSl"/>
                 <tapGestureRecognizer id="7aK-8h-D9K"/>
             </objects>
-            <point key="canvasLocation" x="5907.2463768115949" y="-192.1875"/>
+            <point key="canvasLocation" x="5262" y="-174"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="mvZ-XB-wjb">

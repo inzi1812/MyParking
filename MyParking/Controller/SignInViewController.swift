@@ -25,9 +25,21 @@ class SignInViewController: UIViewController {
     tfPassword.isSecureTextEntry = true // sets ***** for password input
         
     let isUserDefaultsSavedInSystem = checkUserDefaultStatus()
-        if(isUserDefaultsSavedInSystem){
+        if let userEmail = checkUserDefaultStatus() {
+            DBHelper.getInstance().getUser(email: userEmail) { user, result in
+                
+                if result.type == .noConnection{
+                    
+                    self.showAlert(title: "No Connection", message: "You do not seem connected to the internet. Please connect and try again.")
+                }
+                else if(result.type == .success){
+                    
+                    self.currentUser = user!
+                    self.navigateToParkingListScreen()
+                }
+                
+            }
             
-            navigateToParkingListScreen()
         }
         
         else{
@@ -112,17 +124,18 @@ class SignInViewController: UIViewController {
         
     }
     
-    func checkUserDefaultStatus() -> Bool {
+    func checkUserDefaultStatus() -> String? {
         // checks whether the user is saved or not in User Defaults..
         
-        if(defaults.string(forKey: "email") != nil){ // there exists a user who selected Remember Me
+        if let email = defaults.string(forKey: "email") { // there exists a user who selected Remember Me
             
-            return true
+            
+            return email
         }
         
         else {
             
-            return false
+            return nil
         }
     }
     
