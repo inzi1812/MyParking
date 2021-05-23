@@ -27,6 +27,8 @@ class DBHelper
         return shared!
     }
     
+    var currentUserEmail : String?
+    
     private var firestore : Firestore
     
     
@@ -90,6 +92,26 @@ extension DBHelper
        
     }
     
+    
+    func getUser(email : String, completion: @escaping (User?, Result) -> Void)
+    {
+        if checkNetworkConnection()
+        {
+            //Connected to Internet
+            
+            self.checkIfUserPresentinFireStore(mail: email) { user, result in
+                completion(user, result)
+            }
+            
+        }
+        else
+        {
+            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            
+            completion(nil,result)
+        }
+    }
+    
     func validateUser(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
     {
         
@@ -97,6 +119,8 @@ extension DBHelper
         {
             //Connected to Internet
             self.validateUserWithFireStore(mail: mail, pwd: pwd) { tUser, tResult in
+                
+                self.currentUserEmail = tUser?.email
                 
                 completion(tUser, tResult)
                 
@@ -231,6 +255,8 @@ extension DBHelper
         
     }
     
+    
+    
     private func validateUserWithFireStore(mail : String, pwd : String, completion : @escaping (User?,Result) -> ())
     {
         checkIfUserPresentinFireStore(mail: mail) { user, tResult in
@@ -360,7 +386,7 @@ extension DBHelper
         
         let platenumbers = user.cars.map({ $0.licensePlateNumber })
         
-        firestore.collection(USER_ENTITY).whereField("licensePlateNumber", arrayContains: platenumbers).order(by: "dateOfParking",descending: true).getDocuments { queryResults, err in
+        firestore.collection(PARKING_ENTITY).whereField("licensePlateNumber", in: platenumbers).order(by: "dateOfParking", descending: true).getDocuments { queryResults, err in
             
             
             guard err == nil else
@@ -386,8 +412,10 @@ extension DBHelper
                     return
                 }
                 
-                completion(parkings, Result(type: .success, message: "Parkings are retrieved Succesfully"))
+                
             })
+            
+            completion(parkings, Result(type: .success, message: "Parkings are retrieved Succesfully"))
             
         }
     }
