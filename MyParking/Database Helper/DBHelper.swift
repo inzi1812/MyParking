@@ -412,7 +412,6 @@ extension DBHelper
                     return
                 }
                 
-                
             })
             
             completion(parkings, Result(type: .success, message: "Parkings are retrieved Succesfully"))

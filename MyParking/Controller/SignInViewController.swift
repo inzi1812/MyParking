@@ -44,6 +44,9 @@ class SignInViewController: UIViewController {
         
         else{
             super.viewDidLoad()
+            
+            tfEmail.text = "test@test.com"
+            tfPassword.text = "test"
         }
     }
     
