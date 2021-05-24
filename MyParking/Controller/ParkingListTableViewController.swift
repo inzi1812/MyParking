@@ -35,6 +35,7 @@ class ParkingListTableViewController: UITableViewController {
         
         let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AddParkingVC") as! AddParkingVC
         
+        vc.user = currentUser
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
