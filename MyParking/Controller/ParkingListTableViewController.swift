@@ -38,6 +38,8 @@ class ParkingListTableViewController: UITableViewController {
         
         let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AddParkingVC") as! AddParkingVC
         
+        vc.user = currentUser
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -60,7 +62,8 @@ class ParkingListTableViewController: UITableViewController {
             if(result.type == .success){
                 
                 self.listOfAllParkings = parkingList!    // here listOfAllParkings and parkingList both are arrays of a Parking.class object
-               
+                
+                self.tableView.reloadData()
             }
            
             else if (result.type == .failure) {
@@ -68,6 +71,7 @@ class ParkingListTableViewController: UITableViewController {
                 print(#function, "Unable to get parkings.")
                 
             }
+            
         }
         
     }

@@ -93,7 +93,6 @@ class AddParkingVC: UIViewController {
     {
         
         locationManager = CLLocationManager()
-        
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled()
@@ -290,7 +289,7 @@ class AddParkingVC: UIViewController {
         
         let actionSheet = UIAlertController(title: tTitle, message: mes, preferredStyle: .actionSheet)
         
-        let cars = [Car(licensePlateNumber: "123")] //self.user.cars
+        let cars = self.user.cars
         
         for element in cars
         {
