@@ -121,3 +121,11 @@ class UpdateProfileViewController: UIViewController {
         
     }
 }
+
+extension UpdateProfileViewController : UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}

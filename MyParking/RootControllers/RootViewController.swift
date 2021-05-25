@@ -56,12 +56,12 @@ class RootViewController: UIViewController {
         
         
         let nav1 = UINavigationController(rootViewController: listVC)
-        
+        nav1.view.backgroundColor = .white
         
         let profileVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "UserProfileVC") as! UserProfileVC
         
         let nav2 = UINavigationController(rootViewController: profileVC)
-        
+        nav2.view.backgroundColor = .white
         
         tabBarController.viewControllers = [nav1,nav2]
 

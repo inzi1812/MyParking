@@ -124,3 +124,12 @@ class SignInViewController: UIViewController {
     }
 
 }
+
+extension SignInViewController : UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+}
