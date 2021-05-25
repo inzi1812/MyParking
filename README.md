@@ -43,14 +43,18 @@ Sign up Page:
 <img src="Screenshots/Sign_Up_Screen" width="276" height="599" >
 
 Sign Up Page validations:
-<img src="Screenshots/Sign_Up_Screen2" width="276" height="599" > <img src="Screenshots/Sign_Up_Screen3" width="276" height="599" > <img src="Screenshots/Sign_Up_Screen4" width="276" height="599" > 
+<img src="Screenshots/Sign_Up_Screen2" width="276" height="599" > 
+<img src="Screenshots/Sign_Up_Screen3" width="276" height="599" > 
+<img src="Screenshots/Sign_Up_Screen4" width="276" height="599" > 
 
 Add Parking Page:
 
 <img src="Screenshots/Add_Parking_Screen_Before" width="276" height="599" >
 
 Add Parking Page Validations:
-<img src="Screenshots/Add_Parking_Screen_Car_Selection" width="276" height="599" > <img src="Screenshots/Add_Parking_Screen_No_Of_Hours_Selection" width="276" height="599" > <img src="Screenshots/Add_Parking_Screen_After" width="276" height="599" >
+<img src="Screenshots/Add_Parking_Screen_Car_Selection" width="276" height="599" > 
+<img src="Screenshots/Add_Parking_Screen_No_Of_Hours_Selection" width="276" height="599" > 
+<img src="Screenshots/Add_Parking_Screen_After" width="276" height="599" >
 
 Parking List Page:
 
@@ -76,7 +80,7 @@ Update Profile Page:
 
 <img src="Screenshots/Update_Profile_Screen" width="276" height="599" >
 
-User Profile Page after Update adn Add New Car functionality:
+User Profile Page after Update and Add New Car functionality:
 
 <img src="Screenshots/User_Profile_Screen_After_Update" width="276" height="599" >
 
