@@ -27,4 +27,18 @@ enum ParkingHour: Int, Codable, CaseIterable
             return "24 hours"
         }
     }
+    
+    func shortString() -> String
+    {
+        switch self {
+        case .oneHourOrLess:
+            return "1 Hr"
+        case .fourHoursOrLess:
+            return "4 Hrs"
+        case .twelveHoursOrLess:
+            return "12 Hrs"
+        default:
+            return "24 Hrs"
+        }
+    }
 }

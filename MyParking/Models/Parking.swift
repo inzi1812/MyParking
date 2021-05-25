@@ -10,7 +10,7 @@ import FirebaseFirestoreSwift
 
 
 struct Parking: Codable {
-    @DocumentID var id: String?
+    @DocumentID var id: String? = UUID().uuidString
     
     var licensePlateNumber : String
     

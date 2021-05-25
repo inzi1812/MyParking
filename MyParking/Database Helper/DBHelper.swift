@@ -13,7 +13,6 @@ class DBHelper
 {
     private static var shared : DBHelper?
     
-    
     private let USER_ENTITY = "Users"
     private let PARKING_ENTITY = "Parkings"
     
@@ -27,7 +26,7 @@ class DBHelper
         return shared!
     }
     
-    var currentUserEmail : String?
+    var currentUser : User?
     
     private var firestore : Firestore
     
@@ -52,7 +51,6 @@ class DBHelper
                 }
             }
         }
-
         
         networkMonitor.start(queue: queue)
         
@@ -84,7 +82,7 @@ extension DBHelper
         }
         else
         {
-            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
             
             completion(result)
         }
@@ -106,7 +104,7 @@ extension DBHelper
         }
         else
         {
-            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
             
             completion(nil,result)
         }
@@ -119,30 +117,28 @@ extension DBHelper
         {
             //Connected to Internet
             self.validateUserWithFireStore(mail: mail, pwd: pwd) { tUser, tResult in
-                
-                self.currentUserEmail = tUser?.email
-                
+                                
                 completion(tUser, tResult)
                 
             }
         }
         else
         {
-            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
             
             completion(nil,result)
         }
         
     }
     
-    func addVehicle(plateNumber : String, user: User, completion : @escaping (Result) -> Void)
+    func addVehicle(plateNumber : String, completion : @escaping (Result) -> Void)
     {
         
         if checkNetworkConnection()
         {
             
             //Connected to Internet
-            self.addVehicleinFirestore(plateNumber: plateNumber, user: user) { tResult in
+            self.addVehicleinFirestore(plateNumber: plateNumber, user: currentUser!) { tResult in
                 
                 completion(tResult)
             }
@@ -150,7 +146,7 @@ extension DBHelper
         }
         else
         {
-            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
             
             completion(result)
         }
@@ -160,14 +156,14 @@ extension DBHelper
         
     }
     
-    func getParkings(forUser user : User, completion: @escaping([Parking]?, Result) -> Void)
+    func getParkings(completion: @escaping([Parking]?, Result) -> Void)
     {
         
         if checkNetworkConnection()
         {
             //Connected to Internet
             
-            self.getParkingsFromFireStore(forUser: user) { tParkings, result in
+            self.getParkingsFromFireStore(forUser: currentUser!) { tParkings, result in
                 
                 completion(tParkings,result)
                 
@@ -176,7 +172,29 @@ extension DBHelper
         }
         else
         {
-            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
+            
+            completion(nil,result)
+        }
+        
+    }
+    func getParking(id: String, completion: @escaping(Parking?, Result) -> Void)
+    {
+        
+        if checkNetworkConnection()
+        {
+            //Connected to Internet
+            
+            self.getParkingFromFireStore(id: id, forUser: currentUser!) { tParkings, result in
+                
+                completion(tParkings,result)
+                
+            }
+            
+        }
+        else
+        {
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
             
             completion(nil,result)
         }
@@ -192,20 +210,49 @@ extension DBHelper
         }
         else
         {
-            let result = Result(type: .noConnection, message: "no Internet Connection. Try Again after reconnecting.")
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
             
             return result
         }
     }
     
     
+    func deleteParking(parkingId : String, completion: @escaping (Result) -> Void)
+    {
+        if checkNetworkConnection()
+        {
+            return self.deleteParkingFromFirestore(id: parkingId) { res in
+                completion(res)
+            }
+        }
+        else
+        {
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
+            
+            completion(result)
+        }
+    }
+    
+    func deleteUser(completion: @escaping (Result) -> Void)
+    {
+        if checkNetworkConnection()
+        {
+            return self.deleteUserFromFirestore2(user: currentUser!, completion: { res in
+                completion(res)
+            })
+        }
+        else
+        {
+            let result = Result(type: .noConnection, message: "No Internet Connection. Try Again after reconnecting.")
+            
+            completion(result)
+        }
+    }
     
     //MARK: Network Mehods
     private func checkNetworkConnection() -> Bool
     {
-        
         return isNetworkConnected == .connected
-        
     }
     
 }
@@ -274,6 +321,8 @@ extension DBHelper
             if user?.pwd == pwd
             {
                 //Success
+                self.currentUser = user
+
                 let result = Result(type: .success, message: "User Validation Success")
                 completion(user, result)
             }
@@ -287,13 +336,9 @@ extension DBHelper
         }
     }
     
-    
-
-    
     private func checkIfUserPresentinFireStore(mail : String, completion : @escaping (User?,Result) -> ())
     {
         firestore.collection(USER_ENTITY).whereField("email", isEqualTo: mail).getDocuments { queryResults, err in
-            
             
             if let doc = queryResults?.documents.first
             {
@@ -301,7 +346,7 @@ extension DBHelper
                 {
                     
                     let user = try doc.data(as: User.self)
-                    let result = Result(type: .success, message: "User Already Exists")
+                    let result = Result(type: .success, message: "This email is already registered.")
 
                     completion(user, result)
                 }
@@ -313,7 +358,7 @@ extension DBHelper
             }
             else
             {
-                let result = Result(type: .failure, message: "User is Not There")
+                let result = Result(type: .failure, message: "No Such User Exists")
                 completion(nil, result)
             }
             
@@ -412,6 +457,7 @@ extension DBHelper
                     return
                 }
                 
+                
             })
             
             completion(parkings, Result(type: .success, message: "Parkings are retrieved Succesfully"))
@@ -419,6 +465,43 @@ extension DBHelper
         }
     }
     
+    private func getParkingFromFireStore(id: String, forUser user : User, completion: @escaping(Parking?, Result) -> Void)
+    {
+        
+        let platenumbers = user.cars.map({ $0.licensePlateNumber })
+        
+        firestore.collection(PARKING_ENTITY).whereField("licensePlateNumber", in: platenumbers).whereField("id", isEqualTo: id).getDocuments { queryResults, err in
+            
+            
+            guard err == nil else
+            {
+                completion(nil, Result(type: .failure, message: "Error: \(err!.localizedDescription)"))
+                return
+            }
+            
+            
+            guard queryResults?.documents.count == 1, let document = queryResults?.documents.first else
+            {
+                completion(nil, Result(type: .failure, message: "Error Getting Parking"))
+                return
+            }
+            
+
+            do
+            {
+                let parking = try document.data(as: Parking.self)
+                completion(parking, Result(type: .success, message: "Parking retrieved Succesfully"))
+                
+            }
+            catch let err
+            {
+                print(err.localizedDescription)
+                
+                completion(nil, Result(type: .failure, message: "Error Getting Parking \(err.localizedDescription)"))
+                return
+            }
+        }
+    }
     
     
     private func addParkingToFireStore(parking: Parking) -> Result
@@ -440,6 +523,114 @@ extension DBHelper
         return result
 
     }
+    
+    private func deleteParkingFromFirestore(id: String, completion : @escaping (Result) -> Void)
+    {
+        firestore.collection(PARKING_ENTITY).document(id).delete { err in
+            
+            if err != nil
+            {
+                let result = Result(type: .failure, message: "Error: \(err?.localizedDescription)")
+                completion(result)
+            }
+            else
+            {
+                completion(Result(type: .success, message: "Parking Deleted Succesfully"))
+            }
+            
+        }
+    }
+    
+    
+    //firestore.collection(USER_ENTITY).whereField("email", isEqualTo: mail).getDocuments { queryResults, err in
+//
+//     if let doc = queryResults?.documents.first
+//    {
+//        do
+//        {
+//
+//            let user = try doc.data(as: User.self)
+//            let result = Result(type: .success, message: "This email is already registered.")
+//
+//            completion(user, result)
+//        }
+//        catch let err
+//        {
+//            let result = Result(type: .failure, message: "Error: \(err.localizedDescription)")
+//            completion(nil, result)
+//        }
+//    }
+    
+    
+    private func deleteUserFromFirestore2(user: User, completion : @escaping (Result) -> Void)
+    {
+        let docIdEmail : String? = "c2CL9qS0yAyehKMorqMb" // give self.user.id here
+        
+        firestore.collection(USER_ENTITY).document(docIdEmail!).delete()
+        {
+            err in
+            if err != nil
+            {
+                let result = Result(type: .failure, message: "Error: \(err?.localizedDescription)")
+                completion(result)
+            }
+            
+            else
+            {
+                // user is deleted, so now delete all the parkings related to that user
+                self.getParkingsFromFireStore(forUser: self.currentUser!, completion: {(parkingList, result) in
+                    
+                    for i in 0..<parkingList!.count{
+                        
+                        let id = parkingList![i].id
+                        
+                        self.firestore.collection(self.PARKING_ENTITY).document(id!).delete { err in
+                            
+                            if err != nil
+                            {
+                                let result = Result(type: .failure, message: "User Deleted but ran into while deleting parkings. Error: \(err?.localizedDescription)")
+                                completion(result)
+                            }
+                            else
+                            {
+                                completion(Result(type: .success, message: "Parking Deleted Succesfully"))
+                            }
+                            
+                        }
+                    }
+                    
+                    completion(Result(type: .success, message: "User and Parkings Deleted Succesfully"))
+                    
+                })
+            
+            }
+            
+        }
+           
+    }
+    
+    
+    private func deleteUserFromFirestore(email: String, completion : @escaping (Result) -> Void)
+    {
+        let doc = firestore.collection(USER_ENTITY).document(email)
+            
+            doc.delete()
+//            { err in
+//            
+//            if err != nil
+//            {
+//                let result = Result(type: .failure, message: "Error: \(err?.localizedDescription)")
+//                completion(result)
+//            }
+//            else
+//            {
+//                completion(Result(type: .success, message: "User Deleted Succesfully"))
+//            }
+//            
+//        }
+    }
+
+    
 }
 
 
