@@ -24,9 +24,7 @@ class AddParkingVC: UIViewController {
     @IBOutlet var numOfHoursGesture: UITapGestureRecognizer!
             
     @IBOutlet weak var parkingtimeDatePicker: UIDatePicker!
-    
-    var existingParking : Parking?
-    
+        
     private var carNumber : String?
     private var buildingCode : String?
     private var suitNo : String?
@@ -52,23 +50,10 @@ class AddParkingVC: UIViewController {
     func initialSettings()
     {
         
-        if let parking = existingParking
-        {
-            //Edit Page
-            self.carNumber = parking.licensePlateNumber
-            self.buildingCode = parking.buildingCode
-            self.suitNo = parking.hostSuitNum
-            self.numOfHours = parking.parkingHours
-            self.location = parking.location
-            self.parkingTime = parking.dateOfParking
-            
-        }
-        else
-        {
-            //Add Page
-            self.parkingTime = Date()
-            
-        }
+
+        //Add Page
+        self.parkingTime = Date()
+        
         
         setUI()
         
@@ -169,7 +154,7 @@ class AddParkingVC: UIViewController {
         let parkingDate = parkingtimeDatePicker.date
         
         
-        let parking = Parking(id: nil, licensePlateNumber: licensePlateNumber, buildingCode: buildingCode, hostSuitNum: suiteNum, parkingHours: numOfHours, location: location, dateOfParking: parkingDate)
+        let parking = Parking(userId: DBHelper.getInstance().currentEmail, licensePlateNumber: licensePlateNumber, buildingCode: buildingCode, hostSuitNum: suiteNum, parkingHours: numOfHours, location: location, dateOfParking: parkingDate)
 
         let result = DBHelper.getInstance().addParking(parking: parking)
         

@@ -239,47 +239,21 @@ extension DBHelper
             
             //Connected to Internet
             
-            self.checkLicensePlateNumberExistsInFirestore(plateNumber: car.licensePlateNumber) { res in
+            self.getUser { tUser, result in
                 
-                if res.type == .failure
+                if result.type == .success
                 {
-                    //no such car
-                    self.getUser { tUser, result in
+                    self.addVehicleinFirestore(car: car, user: tUser!) { tResult in
                         
-                        if result.type == .success
-                        {
-                            self.addVehicleinFirestore(car: car, user: tUser!) { tResult in
-                                
-                                completion(tResult)
-                            }
-                        }
-                        else
-                        {
-                            completion(result)
-                        }
-                        
+                        completion(tResult)
                     }
-
                 }
                 else
                 {
-                    
-                    if res.type == .success
-                    {
-                       
-                        completion(Result(type: .failure, message: "LicensePlate number exists already"))
-                    }
-                    else
-                    {
-                        completion(res)
-
-                    }
-                    
+                    completion(result)
                 }
                 
             }
-            
-            
             
             
         }
@@ -424,12 +398,17 @@ extension DBHelper
         
         checkIfUserPresentinFireStore(mail: user.email) { _, tResult in
             
-            if tResult.type != .failure
+            if tResult.type == .success
             {
                 //Means User Exists
                 var temp = tResult
                 temp.type = .failure
                 completion(temp)
+                return
+            }
+            else if tResult.type == .noConnection
+            {
+                completion(tResult)
                 return
             }
             
@@ -438,13 +417,13 @@ extension DBHelper
             //Sign up
             do
             {
-                let _ = try self.firestore.collection(self.USER_ENTITY).addDocument(from: user)
+                try self.firestore.collection(self.USER_ENTITY).document(user.email).setData(from: user)
+                
                 
                 result = Result(type: .success, message: "User added Successfully")
             }
-            catch let err
+            catch
             {
-                print(err)
                 result = Result(type: .failure, message: "Error While adding User")
             }
             
@@ -493,52 +472,34 @@ extension DBHelper
     
     private func updateUserinFireStore(for user: User, completion : @escaping (Result) -> Void)
     {
-        firestore.collection(USER_ENTITY).whereField("email", isEqualTo: currentEmail).getDocuments(completion: { queries, err in
+        do
+        {
+            try firestore.collection(USER_ENTITY).document(currentEmail).setData(from: user)
             
-            
-            guard err == nil else
-            {
-                completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
-                return
-            }
-            
-            guard let document = queries?.documents.first else
-            {
-                completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
-                return
-            }
-            
-            do
-            {
-                try document.reference.setData(from: user)
-            }
-            catch let err
-            {
-                let result = Result(type: .success, message: "Error : \(err.localizedDescription)")
-                
-                completion(result)
-                return
-            }
-            
-            
-            completion(Result(type: .success, message: "Updated Successfully"))
-            
-        })
+            completion(Result(type: .success, message: "Updated Succesfully"))
+        }
+        catch
+        {
+            completion(Result(type: .failure, message: "Error while updating"))
+
+        }
+
     }
     
     private func checkIfUserPresentinFireStore(mail : String, completion : @escaping (User?,Result) -> ())
     {
-        firestore.collection(USER_ENTITY).whereField("email", isEqualTo: mail).getDocuments { queryResults, err in
+        
+        let doc = firestore.collection(USER_ENTITY).document(mail)
+        
+        doc.getDocument { document, err in
             
-            
-            if let doc = queryResults?.documents.first
+            if document?.data() != nil
             {
                 do
                 {
                     
-                    let user = try doc.data(as: User.self)
+                    let user = try document?.data(as: User.self)
                     let result = Result(type: .success, message: "User Exists")
-
                     completion(user, result)
                 }
                 catch let err
@@ -546,95 +507,43 @@ extension DBHelper
                     let result = Result(type: .failure, message: "Error: \(err.localizedDescription)")
                     completion(nil, result)
                 }
+                
             }
             else
             {
-                let result = Result(type: .failure, message: "No Such User")
+                let result = Result(type: .failure, message: "Error: No User")
                 completion(nil, result)
             }
             
         }
-    }
-    
-    private func checkLicensePlateNumberExistsInFirestore(plateNumber : String, completion : @escaping (Result ) -> Void)
-    {
-        firestore.collection(USER_ENTITY).whereField("licensePlateNum", arrayContains: plateNumber).getDocuments { queryResults, err in
-            
-            if let _ = queryResults?.documents.first
-            {
-                let result = Result(type: .success, message: "License Plate Number Already Exists in the System")
-                completion(result)
-                
-            }
-            else
-            {
-                let result = Result(type: .failure, message: "License Plate Number is Not in Database")
-                
-                completion(result)
-            }
-            
-        }
-        
-        
         
     }
-    
+        
     
     private func addVehicleinFirestore(car : Car, user: User, completion : @escaping (Result) -> Void)
     {
-        
-        checkLicensePlateNumberExistsInFirestore(plateNumber: car.licensePlateNumber) { tResult in
-            
-            if tResult.type != .failure
-            {
-                var temp = tResult
-                temp.type = .failure
-                //License Plate is already in the system
-                completion(temp)
-                return
-            }
-            
-        }
-        
+
         var tUser = user
         
+        if tUser.cars.map({ $0.licensePlateNumber }).contains(car.licensePlateNumber)
+        {
+            completion(Result(type: .failure, message: "The Car is already associated to this user"))
+            return
+        }
         
         tUser.cars.append(car)
         
-
-            firestore.collection(USER_ENTITY).whereField("email", isEqualTo: user.email).getDocuments(completion: { queries, err in
-                
-                
-                guard err == nil else
-                {
-                    completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
-                    return
-                }
-                
-                guard let document = queries?.documents.first else
-                {
-                    completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
-                    return
-                }
-                
-                do
-                {
-                    try document.reference.setData(from: tUser)
-                }
-                catch let err
-                {
-                    let result = Result(type: .success, message: "Error : \(err.localizedDescription)")
-                    
-                    completion(result)
-                    return
-                }
-                
-                
-                completion(Result(type: .success, message: "Updated Successfully"))
-                
-            })
+        self.updateUserinFireStore(for: tUser) { result in
             
-
+            if result.type == .success
+            {
+                completion(Result(type: .success, message: "Car Added Succesfully"))
+            }
+            else
+            {
+                completion(result)
+            }
+        }
         
     }
     
@@ -642,11 +551,9 @@ extension DBHelper
     private func getParkingsFromFireStore(forUser user : User, completion: @escaping([Parking]?, Result) -> Void)
     {
         
-        getUser { tUser, result in
+
             
-            if result.type == .success
-            {
-                let platenumbers = tUser!.cars.map({ $0.licensePlateNumber })
+                let platenumbers = user.cars.map({ $0.licensePlateNumber })
                 
                 self.firestore.collection(self.PARKING_ENTITY).whereField("licensePlateNumber", in: platenumbers).order(by: "dateOfParking", descending: true).getDocuments { queryResults, err in
                     
@@ -680,13 +587,6 @@ extension DBHelper
                     completion(parkings, Result(type: .success, message: "Parkings are retrieved Succesfully"))
                     
                 }
-
-            }
-            else
-            {
-                completion(nil, result)
-            }
-        }
         
     }
     

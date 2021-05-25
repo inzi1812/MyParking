@@ -6,9 +6,14 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
+
 
 
 struct Car: Codable {
+    
+    
+    @DocumentID var id : String?
     
     var carName : String = ""
     var licensePlateNumber : String
