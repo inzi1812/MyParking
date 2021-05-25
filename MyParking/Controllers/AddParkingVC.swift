@@ -25,9 +25,7 @@ class AddParkingVC: UIViewController {
             
     @IBOutlet weak var parkingtimeDatePicker: UIDatePicker!
     
-    
     var existingParking : Parking?
-    
     
     private var carNumber : String?
     private var buildingCode : String?
@@ -139,7 +137,7 @@ class AddParkingVC: UIViewController {
         {
             
             let title = "Invalid Suite number"
-            let message = "Building code should be min 2 and max 5 alphanumeric characters"
+            let message = "Suite number should be min 2 and max 5 alphanumeric characters"
             
             self.showAlert(title: title, message: message)
             return
@@ -189,6 +187,7 @@ class AddParkingVC: UIViewController {
             
             self.present(alert, animated: true, completion: nil)
         }
+        
         else
         {
             let title = result.type.rawValue
@@ -228,9 +227,6 @@ class AddParkingVC: UIViewController {
     
     //MARK:- Button and Gesture Actions
     
-
-    
-    
     @IBAction func useLocationButtonClicked(_ sender: UIButton) {
         
         self.view.endEditing(true)
@@ -247,7 +243,6 @@ class AddParkingVC: UIViewController {
         }
         
     }
-    
     
     
     @objc func numOfHoursAreaTapped(gesture: UITapGestureRecognizer)
@@ -297,7 +292,6 @@ class AddParkingVC: UIViewController {
             if res.type == .success, let user = user
             {
                 let actionSheet = UIAlertController(title: tTitle, message: mes, preferredStyle: .actionSheet)
-
                 
                 let cars = user.cars ?? []
 
@@ -480,7 +474,7 @@ extension AddParkingVC: CLLocationManagerDelegate
             }
             
             
-            var tStr: String? = locationStrings.reversed().joined(separator: ",")
+            var tStr: String? = locationStrings.reversed().joined(separator: ", ")
             
             if tStr == ""
             {

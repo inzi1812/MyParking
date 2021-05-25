@@ -844,6 +844,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No parkings available." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rKK-vf-x6Z">
+                            <rect key="frame" x="0.0" y="129.00000034679067" width="414" height="69"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="parkingListCell" rowHeight="80" id="icP-g7-FRW" customClass="ParkingListCell" customModule="MyParking" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="80"/>
@@ -936,6 +943,9 @@
                             <outlet property="delegate" destination="Knm-Aa-7rd" id="P8M-VA-L8s"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="lblParkingMessage" destination="rKK-vf-x6Z" id="kC5-aF-7mo"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCU-Vy-rIA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
