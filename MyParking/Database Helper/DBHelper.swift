@@ -239,21 +239,46 @@ extension DBHelper
             
             //Connected to Internet
             
-            self.getUser { tUser, result in
+            self.checkLicensePlateNumberExistsInFirestore(plateNumber: car.licensePlateNumber) { res in
                 
-                if result.type == .success
+                if res.type == .failure
                 {
-                    self.addVehicleinFirestore(car: car, user: tUser!) { tResult in
+                    //no such car
+                    self.getUser { tUser, result in
                         
-                        completion(tResult)
+                        if result.type == .success
+                        {
+                            self.addVehicleinFirestore(car: car, user: tUser!) { tResult in
+                                
+                                completion(tResult)
+                            }
+                        }
+                        else
+                        {
+                            completion(result)
+                        }
+                        
                     }
+
                 }
                 else
                 {
-                    completion(result)
+                    
+                    if res.type == .success
+                    {
+                       
+                        completion(Result(type: .failure, message: "LicensePlate number exists already"))
+                    }
+                    else
+                    {
+                        completion(res)
+
+                    }
+                    
                 }
                 
             }
+            
             
             
             
@@ -549,6 +574,9 @@ extension DBHelper
             }
             
         }
+        
+        
+        
     }
     
     
