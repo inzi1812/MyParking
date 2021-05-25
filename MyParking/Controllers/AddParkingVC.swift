@@ -292,15 +292,14 @@ class AddParkingVC: UIViewController {
         
         
         
-        DBHelper.getInstance().getUser(email: DBHelper.getInstance().currentUser!.email) { user, res in
+        DBHelper.getInstance().getUser( completion: { user, res in
             
             if res.type == .success, let user = user
             {
                 let actionSheet = UIAlertController(title: tTitle, message: mes, preferredStyle: .actionSheet)
 
                 
-                let cars = user.cars ?? []
-
+                let cars = user.cars
                 
                 for element in cars
                 {
@@ -325,7 +324,7 @@ class AddParkingVC: UIViewController {
                 self.showAlert(title: "Error", message: res.message)
             }
             
-        }
+        })
         
         
 

@@ -24,17 +24,18 @@ class UserProfileVC: UIViewController {
 
         
         // Do any additional setup after loading the view.
+        carsTableView.delegate = self
         
         self.title = "Profile"
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), style: .plain, target: self, action: #selector(signOutButtonPressed))
         
         
-        self.getCars()
-        
-        
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getUser()
+    }
     
     @IBAction func addCarButtonPressed(_ sender: Any) {
         
@@ -89,7 +90,6 @@ class UserProfileVC: UIViewController {
         alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
             action in
             
-            
             DBHelper.getInstance().deleteUser { result in
                 
                 if result.type == .success
@@ -107,35 +107,28 @@ class UserProfileVC: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
             action in
             
-            
         }))
-        
         
         self.present(alertController, animated: true, completion: nil)
 
     }
     
     
-    func getCars()
+    func getUser()
     {
-        let user = DBHelper.getInstance().currentUser!
-        
-        
-        self.lblName.text = user.name
-        self.lblEmail.text = user.email
-        
-        DBHelper.getInstance().getUser(email: user.email) { user, result in
+        DBHelper.getInstance().getUser( completion: { user, result in
             
-            guard let user = user else
+            guard let user = user, result.type == .success else
             {
-                
+                self.showAlert(title: "Error", message: result.message)
                 return
             }
-            
+            self.lblName.text = user.name
+            self.lblEmail.text = user.email
             self.cars = user.cars
             self.carsTableView.reloadData()
             
-        }
+        })
     }
     
     
@@ -144,11 +137,11 @@ class UserProfileVC: UIViewController {
         
         let car = Car(carName: name, licensePlateNumber: plateNumber)
         
-        DBHelper.getInstance().addVehicle(car: car) { result in
+        DBHelper.getInstance().addCar(car: car) { result in
             
             if result.type == .success
             {
-                self.getCars()
+                self.getUser()
             }
             else
             {
@@ -170,7 +163,7 @@ class UserProfileVC: UIViewController {
 
 }
 
-extension UserProfileVC : UITableViewDataSource
+extension UserProfileVC : UITableViewDataSource, UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.cars.count
@@ -185,5 +178,35 @@ extension UserProfileVC : UITableViewDataSource
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete
+        {
+            DBHelper.getInstance().deleteCar(car: cars[indexPath.row]) { result in
+                
+                if result.type == .success
+                {
+                    self.cars.remove(at: indexPath.row)
+                    
+                    self.carsTableView.deleteRows(at: [indexPath], with: .fade)
+                }
+                else
+                {
+                    self.showAlert(title: "Error", message: result.message)
+                }
+                
+            }
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        
+        
+        return cars.count > 1
+    }
+
     
 }

@@ -88,7 +88,7 @@ class RootViewController: UIViewController {
     func signOut()
     {
         resetUserDefaults()
-        DBHelper.getInstance().currentUser = nil
+        DBHelper.resetUser()
         switchToLoginPage()
     }
     

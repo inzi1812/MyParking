@@ -30,7 +30,7 @@ class SplashViewController: UIViewController {
                 }
                 else if(result.type == .success){
                     
-                    DBHelper.getInstance().currentUser = user
+                    DBHelper.setUser(user: user!)
                     self.SceneRootController.switchToMainScreen()
                 }
                 else
