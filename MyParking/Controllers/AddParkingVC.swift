@@ -25,10 +25,7 @@ class AddParkingVC: UIViewController {
             
     @IBOutlet weak var parkingtimeDatePicker: UIDatePicker!
     
-    
     var existingParking : Parking?
-    var user : User!
-    
     
     private var carNumber : String?
     private var buildingCode : String?
@@ -93,6 +90,7 @@ class AddParkingVC: UIViewController {
     {
         
         locationManager = CLLocationManager()
+        
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled()
@@ -139,7 +137,7 @@ class AddParkingVC: UIViewController {
         {
             
             let title = "Invalid Suite number"
-            let message = "Building code should be min 2 and max 5 alphanumeric characters"
+            let message = "Suite number should be min 2 and max 5 alphanumeric characters"
             
             self.showAlert(title: title, message: message)
             return
@@ -189,6 +187,7 @@ class AddParkingVC: UIViewController {
             
             self.present(alert, animated: true, completion: nil)
         }
+        
         else
         {
             let title = result.type.rawValue
@@ -228,23 +227,22 @@ class AddParkingVC: UIViewController {
     
     //MARK:- Button and Gesture Actions
     
-
-    
-    
     @IBAction func useLocationButtonClicked(_ sender: UIButton) {
         
         self.view.endEditing(true)
 
+        
         if locationManager == nil
         {
             setUpLocationManager()
         }
         
-        locationManager.startUpdatingLocation()
-
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.startUpdatingLocation()
+        }
         
     }
-    
     
     
     @objc func numOfHoursAreaTapped(gesture: UITapGestureRecognizer)
@@ -287,27 +285,44 @@ class AddParkingVC: UIViewController {
         let tTitle = "Select Car"
         let mes = "Select the car for parking"
         
-        let actionSheet = UIAlertController(title: tTitle, message: mes, preferredStyle: .actionSheet)
         
-        let cars = self.user.cars
         
-        for element in cars
-        {
-            actionSheet.addAction(UIAlertAction(title: element.licensePlateNumber, style: .default, handler: { action in
+        DBHelper.getInstance().getUser(email: DBHelper.getInstance().currentUser!.email) { user, res in
+            
+            if res.type == .success, let user = user
+            {
+                let actionSheet = UIAlertController(title: tTitle, message: mes, preferredStyle: .actionSheet)
                 
+                let cars = user.cars ?? []
 
-                self.carNumber = element.licensePlateNumber
                 
-                self.lblSelectedCar.text = element.licensePlateNumber
+                for element in cars
+                {
+                    actionSheet.addAction(UIAlertAction(title: element.carString(), style: .default, handler: { action in
+                        
+
+                        self.carNumber = element.licensePlateNumber
+                        
+                        self.lblSelectedCar.text = element.carString()
+                        
+                    }))
+                }
                 
-            }))
+                actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    
+                }))
+                
+                self.present(actionSheet, animated: true, completion: nil)
+            }
+            else
+            {
+                self.showAlert(title: "Error", message: res.message)
+            }
+            
         }
         
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            
-        }))
         
-        self.present(actionSheet, animated: true, completion: nil)
+
     }
     
 }
@@ -334,7 +349,7 @@ extension AddParkingVC : UITextFieldDelegate
         else
         {
             //Parking Location
-            guard let address = textField.text else
+            guard let address = textField.text, address != "" else
             {
                 self.location = nil
                 return
