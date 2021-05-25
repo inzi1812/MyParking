@@ -32,7 +32,7 @@ Rajdeep Dodiya - 101320088
 
 Firebase:
 
-<img src="Screenshots/Screenshot%202021-05-18%20at%208.25.24%20PM.jpg" >
+<img src="Screenshots/Firebase" >
 
 Sign In Page:
 
