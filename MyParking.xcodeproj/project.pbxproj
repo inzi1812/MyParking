@@ -29,6 +29,7 @@
 		C99E92D626543FFA00BB20A9 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92D526543FFA00BB20A9 /* Car.swift */; };
 		D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */; };
 		D62FFB0A2659BBAF00C27DA1 /* ParkingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62FFB092659BBAF00C27DA1 /* ParkingListCell.swift */; };
+		D6A442BC265D668200AED3B5 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A442BB265D668200AED3B5 /* UpdateProfileViewController.swift */; };
 		D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC60FE2650067C00347F70 /* SignUpViewController.swift */; };
 		D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC610026500C9D00347F70 /* SignInViewController.swift */; };
 		D6FBA8F42654433100B9CCE6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FBA8F32654433100B9CCE6 /* Extensions.swift */; };
@@ -61,6 +62,7 @@
 		C99E92D526543FFA00BB20A9 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListTableViewController.swift; sourceTree = "<group>"; };
 		D62FFB092659BBAF00C27DA1 /* ParkingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingListCell.swift; sourceTree = "<group>"; };
+		D6A442BB265D668200AED3B5 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
 		D6BC60FE2650067C00347F70 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D6BC610026500C9D00347F70 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D6FBA8F32654433100B9CCE6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
 				D6BC60FE2650067C00347F70 /* SignUpViewController.swift */,
 				C99605B0265CB2640085B87E /* UserProfileVC.swift */,
+				D6A442BB265D668200AED3B5 /* UpdateProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				C99605AE265BEC620085B87E /* SplashViewController.swift in Sources */,
 				C99E929A2651D0FE00BB20A9 /* Parking.swift in Sources */,
 				C96B5EA6264C7AFA003942ED /* SceneDelegate.swift in Sources */,
+				D6A442BC265D668200AED3B5 /* UpdateProfileViewController.swift in Sources */,
 				C99E92D626543FFA00BB20A9 /* Car.swift in Sources */,
 				D6BC60FF2650067C00347F70 /* SignUpViewController.swift in Sources */,
 			);
