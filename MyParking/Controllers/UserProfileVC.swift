@@ -13,6 +13,7 @@ class UserProfileVC: UIViewController {
     
     @IBOutlet weak var lblEmail: UILabel!
     
+    @IBOutlet weak var lblContactNum: UILabel!
     
     @IBOutlet weak var carsTableView: UITableView!
     
@@ -79,9 +80,30 @@ class UserProfileVC: UIViewController {
     
     @objc func signOutButtonPressed() {
         
-        SceneRootController.signOut()
+        let alertController = UIAlertController(title: "Log out", message: "Are you sure you want to Log out?", preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Sign out", style: .default, handler: { _ in
+            
+            self.SceneRootController.signOut()
+
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
         
     }
+    
+    @IBAction func editProfilePressed(_ sender: Any) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "UpdateProfileViewController") as! UpdateProfileViewController
+        
+        vc.hidesBottomBarWhenPushed = true
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     
     @IBAction func DeleteButtonPressed(_ sender: Any) {
         
@@ -125,6 +147,10 @@ class UserProfileVC: UIViewController {
             }
             self.lblName.text = user.name
             self.lblEmail.text = user.email
+            
+            let num = (user.contactNumber ?? "") != "" ? user.contactNumber! : "-"
+            self.lblContactNum.text = "Ph: \(num)"
+            
             self.cars = user.cars
             self.carsTableView.reloadData()
             

@@ -18,6 +18,7 @@ class ParkingListTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.title = "Parkings"
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(navigateToAddParkingScreen))
         
@@ -35,6 +36,8 @@ class ParkingListTableViewController: UITableViewController {
     @objc func navigateToAddParkingScreen(){
         
         let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AddParkingVC") as! AddParkingVC
+        
+        vc.hidesBottomBarWhenPushed = true
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
