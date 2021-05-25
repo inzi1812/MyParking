@@ -12,4 +12,14 @@ struct Car: Codable {
     
     var carName : String = ""
     var licensePlateNumber : String
+    
+    
+    func carString() -> String
+    {
+        if carName != ""
+        {
+            return carName + "(\(licensePlateNumber))"
+        }
+        return licensePlateNumber
+    }
 }

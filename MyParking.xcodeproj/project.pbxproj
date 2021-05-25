@@ -16,6 +16,9 @@
 		C96B5EB3264C7AFB003942ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */; };
 		C9808A972656D21600E40954 /* AddParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9808A962656D21600E40954 /* AddParkingVC.swift */; };
 		C99605A726598BDE0085B87E /* ParkingDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99605A626598BDE0085B87E /* ParkingDetailVC.swift */; };
+		C99605AC265BEADC0085B87E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99605AB265BEADC0085B87E /* RootViewController.swift */; };
+		C99605AE265BEC620085B87E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99605AD265BEC620085B87E /* SplashViewController.swift */; };
+		C99605B1265CB2640085B87E /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99605B0265CB2640085B87E /* UserProfileVC.swift */; };
 		C99E928F265045F800BB20A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C99E928E265045F800BB20A9 /* GoogleService-Info.plist */; };
 		C99E92982650E57400BB20A9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92972650E57400BB20A9 /* User.swift */; };
 		C99E929A2651D0FE00BB20A9 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E92992651D0FE00BB20A9 /* Parking.swift */; };
@@ -45,6 +48,9 @@
 		C96B5EB4264C7AFB003942ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9808A962656D21600E40954 /* AddParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParkingVC.swift; sourceTree = "<group>"; };
 		C99605A626598BDE0085B87E /* ParkingDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingDetailVC.swift; sourceTree = "<group>"; };
+		C99605AB265BEADC0085B87E /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		C99605AD265BEC620085B87E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		C99605B0265CB2640085B87E /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		C99E928E265045F800BB20A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C99E92972650E57400BB20A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C99E92992651D0FE00BB20A9 /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
@@ -110,12 +116,10 @@
 		C96B5EA2264C7AFA003942ED /* MyParking */ = {
 			isa = PBXGroup;
 			children = (
-				D61B75C5265707A6000D1E03 /* Controller */,
+				C99605A8265BEA840085B87E /* RootControllers */,
+				D61B75C5265707A6000D1E03 /* Controllers */,
 				C99E929F26520DCE00BB20A9 /* Database Helper */,
 				C99E92962650E56700BB20A9 /* Models */,
-				C9808A942656D1CA00E40954 /* View Controller */,
-				C96B5EA3264C7AFA003942ED /* AppDelegate.swift */,
-				C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */,
 				C96B5EA9264C7AFA003942ED /* Main.storyboard */,
 				C96B5EAF264C7AFB003942ED /* Assets.xcassets */,
 				C96B5EB1264C7AFB003942ED /* LaunchScreen.storyboard */,
@@ -127,13 +131,23 @@
 			path = MyParking;
 			sourceTree = "<group>";
 		};
-		C9808A942656D1CA00E40954 /* View Controller */ = {
+		C99605A8265BEA840085B87E /* RootControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C9808A962656D21600E40954 /* AddParkingVC.swift */,
-				C99605A626598BDE0085B87E /* ParkingDetailVC.swift */,
+				C96B5EA3264C7AFA003942ED /* AppDelegate.swift */,
+				C96B5EA5264C7AFA003942ED /* SceneDelegate.swift */,
+				C99605AB265BEADC0085B87E /* RootViewController.swift */,
+				C99605AD265BEC620085B87E /* SplashViewController.swift */,
 			);
-			path = "View Controller";
+			path = RootControllers;
+			sourceTree = "<group>";
+		};
+		C99605AF265CB23A0085B87E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D62FFB092659BBAF00C27DA1 /* ParkingListCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		C99E92962650E56700BB20A9 /* Models */ = {
@@ -157,15 +171,18 @@
 			path = "Database Helper";
 			sourceTree = "<group>";
 		};
-		D61B75C5265707A6000D1E03 /* Controller */ = {
+		D61B75C5265707A6000D1E03 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C99605AF265CB23A0085B87E /* Cells */,
 				D61B75C6265707C6000D1E03 /* ParkingListTableViewController.swift */,
+				C9808A962656D21600E40954 /* AddParkingVC.swift */,
+				C99605A626598BDE0085B87E /* ParkingDetailVC.swift */,
 				D6BC610026500C9D00347F70 /* SignInViewController.swift */,
 				D6BC60FE2650067C00347F70 /* SignUpViewController.swift */,
-				D62FFB092659BBAF00C27DA1 /* ParkingListCell.swift */,
+				C99605B0265CB2640085B87E /* UserProfileVC.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,20 +302,20 @@
 			files = (
 				C96B5EAE264C7AFA003942ED /* MyParking.xcdatamodeld in Sources */,
 				C99E92D426541C6F00BB20A9 /* Result.swift in Sources */,
+				C99605AC265BEADC0085B87E /* RootViewController.swift in Sources */,
+				C99605B1265CB2640085B87E /* UserProfileVC.swift in Sources */,
 				D6BC610126500C9D00347F70 /* SignInViewController.swift in Sources */,
 				C99E929E2651D2DC00BB20A9 /* Location.swift in Sources */,
 				C99E929C2651D16E00BB20A9 /* ParkingHours.swift in Sources */,
 				C99E92A126520DEE00BB20A9 /* DBHelper.swift in Sources */,
 				D61B75C7265707C6000D1E03 /* ParkingListTableViewController.swift in Sources */,
 				C96B5EA4264C7AFA003942ED /* AppDelegate.swift in Sources */,
-
 				D62FFB0A2659BBAF00C27DA1 /* ParkingListCell.swift in Sources */,
-
 				C99605A726598BDE0085B87E /* ParkingDetailVC.swift in Sources */,
-
 				D6FBA8F42654433100B9CCE6 /* Extensions.swift in Sources */,
 				C99E92982650E57400BB20A9 /* User.swift in Sources */,
 				C9808A972656D21600E40954 /* AddParkingVC.swift in Sources */,
+				C99605AE265BEC620085B87E /* SplashViewController.swift in Sources */,
 				C99E929A2651D0FE00BB20A9 /* Parking.swift in Sources */,
 				C96B5EA6264C7AFA003942ED /* SceneDelegate.swift in Sources */,
 				C99E92D626543FFA00BB20A9 /* Car.swift in Sources */,

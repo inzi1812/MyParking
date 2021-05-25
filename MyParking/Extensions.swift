@@ -5,7 +5,7 @@
 //  Created by RD on 18/05/21.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     
@@ -57,5 +57,40 @@ extension String {
         else {
             return false
         }
+    }
+}
+
+
+extension UIViewController {
+    func add(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+
+    func remove() {
+        // Just to be safe, we check that this view controller
+        // is actually added to a parent before removing it.
+        guard parent != nil else {
+            return
+        }
+
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
+}
+
+extension UIViewController {
+
+    var sceneDelegate: SceneDelegate? {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let delegate = windowScene.delegate as? SceneDelegate else { return nil }
+         return delegate
+    }
+    
+    var SceneRootController : RootViewController
+    {
+        return sceneDelegate?.window?.rootViewController as! RootViewController
     }
 }

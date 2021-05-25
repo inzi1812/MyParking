@@ -10,8 +10,8 @@ import UIKit
 class ParkingListCell: UITableViewCell {
     
     @IBOutlet weak var tfCarPlateNumber: UILabel!
-    @IBOutlet weak var tfBuildingCode: UILabel!
-    @IBOutlet weak var tfHostSuitNo: UILabel!
+    @IBOutlet weak var tfDate: UILabel!
+    @IBOutlet weak var tfAddress: UILabel!
     @IBOutlet weak var tfParkingHours: UILabel!
     
     override func awakeFromNib() {

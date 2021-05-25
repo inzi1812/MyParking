@@ -18,33 +18,18 @@ class SignInViewController: UIViewController {
     let defaults = UserDefaults.standard
     
     var email : String = ""
-    var currentUser = User(email: "", name: "", cars: [], pwd: "", contactNumber: "")
+    var currentUser: User!
     
     override func viewDidLoad() {
         
-    tfPassword.isSecureTextEntry = true // sets ***** for password input
+        super.viewDidLoad()
         
-    let isUserDefaultsSavedInSystem = checkUserDefaultStatus()
-        if let userEmail = checkUserDefaultStatus() {
-            DBHelper.getInstance().getUser(email: userEmail) { user, result in
-                
-                if result.type == .noConnection{
-                    
-                    self.showAlert(title: "No Connection", message: "You do not seem connected to the internet. Please connect and try again.")
-                }
-                else if(result.type == .success){
-                    
-                    self.currentUser = user!
-                    self.navigateToParkingListScreen()
-                }
-                
-            }
-            
-        }
+        tfPassword.isSecureTextEntry = true // sets ***** for password input
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        else{
-            super.viewDidLoad()
-        }
     }
     
     @IBAction func btnLoginClicked(_ sender: Any) {
@@ -104,12 +89,15 @@ class SignInViewController: UIViewController {
     
     func navigateToParkingListScreen(){
         
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let parking_list_ViewController = storyboard.instantiateViewController(identifier: "parkingList_VC") as! ParkingListTableViewController
+        SceneRootController.switchToMainScreen()
+        return
         
-        parking_list_ViewController.currentUser = currentUser
-        self.navigationController?.pushViewController(parking_list_ViewController, animated: true)
+//        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        
+//        let parking_list_ViewController = storyboard.instantiateViewController(identifier: "parkingList_VC") as! ParkingListTableViewController
+//        
+//        self.navigationController?.pushViewController(parking_list_ViewController, animated: true)
         
     }
     
@@ -124,20 +112,6 @@ class SignInViewController: UIViewController {
         
     }
     
-    func checkUserDefaultStatus() -> String? {
-        // checks whether the user is saved or not in User Defaults..
-        
-        if let email = defaults.string(forKey: "email") { // there exists a user who selected Remember Me
-            
-            
-            return email
-        }
-        
-        else {
-            
-            return nil
-        }
-    }
     
     
     func showAlert(title : String, message : String){

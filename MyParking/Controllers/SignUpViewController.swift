@@ -17,6 +17,8 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var tfContactNumber: UITextField!
     
+    @IBOutlet weak var tfCarName: UITextField!
+    
     @IBOutlet weak var tfCarplateNumber: UITextField!
     
     override func viewDidLoad() {
@@ -33,6 +35,8 @@ class SignUpViewController: UIViewController {
             print("invalid values for name, email, password, contact number, car plate number fields")
             return
         }
+        
+        let carName = tfCarName.text ?? ""
         
         if(name == ""){
             showAlert(title: "Empty Credentials", message: "Please enter your name")
@@ -66,25 +70,25 @@ class SignUpViewController: UIViewController {
             
             let email = tfEmail.text!
             
-            let car = Car(licensePlateNumber: tfCarplateNumber.text!)
+            let car = Car(carName: carName,licensePlateNumber: carPlateNUmber)
             
             let newUser = User(email: email, name: tfName.text!, cars: [car], pwd: tfPassword.text!, contactNumber: tfContactNumber.text!)
             
             DBHelper.getInstance().addUser(user: newUser) { result in
-                    
+                
                 if result.type == .success {
-                                  
-                                   let alert = UIAlertController(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.", preferredStyle: .alert)
-                                   
-                                   alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { action in
-                                       
-                                       self.navigationController?.popViewController(animated: true)
-
-//                                       self.dismiss(animated: true, completion: nil)
-                                       
-                                       }))
-                                   
-                                   self.present(alert, animated: true, completion: nil)
+                    
+                    let alert = UIAlertController(title: "Sign Up Successful", message: "You have been registered. You will now be re-directed to the login screen.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Login", style: .default, handler: { action in
+                        
+                        self.navigationController?.popViewController(animated: true)
+                        
+                        //                                       self.dismiss(animated: true, completion: nil)
+                        
+                    }))
+                    
+                    self.present(alert, animated: true, completion: nil)
                     
                 }
                 
@@ -95,13 +99,8 @@ class SignUpViewController: UIViewController {
                 
             }
             
-        
+            
         }
-    
-    }
-    
-    func navigateToSignInScreen(){
-        
         
     }
     
@@ -114,5 +113,5 @@ class SignUpViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
-
+    
 }
