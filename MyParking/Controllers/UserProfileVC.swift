@@ -10,14 +10,20 @@ import UIKit
 class UserProfileVC: UIViewController {
     
     @IBOutlet weak var lblName: UILabel!
-    
     @IBOutlet weak var lblEmail: UILabel!
-    
     
     @IBOutlet weak var carsTableView: UITableView!
     
+    private var currentUser : User = User(email: "", name: "", cars: [], pwd: "", contactNumber: "")
     
     private var cars: [Car] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+    
+        super.viewWillAppear(animated)
+        updateUserInfo()
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +41,16 @@ class UserProfileVC: UIViewController {
         
     }
     
+    private func updateUserInfo(){
+    
+        currentUser = DBHelper.getInstance().currentUser!
+        
+        self.lblName.text = currentUser.name
+        self.lblEmail.text = currentUser.email
+        
+        self.getCars()
+    }
+    
     
     @IBAction func addCarButtonPressed(_ sender: Any) {
         
@@ -42,7 +58,7 @@ class UserProfileVC: UIViewController {
 
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
-            textField.placeholder = "Enter Car Name(Optonal)"
+            textField.placeholder = "Enter Car Name(Optional)"
         }
 
         alert.addTextField { (textField) in
@@ -82,6 +98,17 @@ class UserProfileVC: UIViewController {
         
     }
     
+    
+    @IBAction func btnUpdateProfilePressed(_ sender: Any) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "UpdateProfile_ViewController") as! UpdateProfileViewController
+        
+        vc.hidesBottomBarWhenPushed = true
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     @IBAction func DeleteButtonPressed(_ sender: Any) {
         
         let alertController = UIAlertController(title: "DELETE Profile", message: "Are you sure you want to delete this user account?", preferredStyle: .alert)
@@ -118,13 +145,7 @@ class UserProfileVC: UIViewController {
     
     func getCars()
     {
-        let user = DBHelper.getInstance().currentUser!
-        
-        
-        self.lblName.text = user.name
-        self.lblEmail.text = user.email
-        
-        DBHelper.getInstance().getUser(email: user.email) { user, result in
+        DBHelper.getInstance().getUser(email: currentUser.email) { user, result in
             
             guard let user = user else
             {

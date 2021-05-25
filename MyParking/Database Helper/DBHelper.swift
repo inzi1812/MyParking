@@ -180,6 +180,8 @@ extension DBHelper
         }
         
     }
+    
+    
     func getParking(id: String, completion: @escaping(Parking?, Result) -> Void)
     {
         
@@ -567,26 +569,64 @@ extension DBHelper
         }
     }
     
-    private func deleteUserFromFirestore(email: String, completion : @escaping (Result) -> Void)
-    {
-        let doc = firestore.collection(USER_ENTITY).document(email)
-            
-            doc.delete()
-//            { err in
-//
-//            if err != nil
-//            {
-//                let result = Result(type: .failure, message: "Error: \(err?.localizedDescription)")
-//                completion(result)
-//            }
-//            else
-//            {
-//                completion(Result(type: .success, message: "User Deleted Succesfully"))
-//            }
-//
-//        }
-    }
-
+    private func deleteAllParkingsFromFirestore(for plateNumbers: [String], completion : @escaping (Result) -> Void)
+      {
+        firestore.collection(PARKING_ENTITY).whereField("licensePlateNumber", in: plateNumbers).getDocuments { queries, err in
+          guard err == nil else
+          {
+            completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
+            return
+          }
+          guard let documents = queries?.documents else
+          {
+            completion(Result(type: .failure, message: "Error: No Entry Available"))
+            return
+          }
+          for document in documents
+          {
+            document.reference.delete()
+          }
+          completion(Result(type: .success, message: "Parkings Deleted Successfully"))
+        }
+      }
+    
+      private func deleteUserFromFirestore(email: String, completion : @escaping (Result) -> Void)
+        {
+          firestore.collection(USER_ENTITY).whereField("email", isEqualTo: currentUser!.email).getDocuments(completion: { queries, err in
+            guard err == nil else
+            {
+              completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
+              return
+            }
+            guard let document = queries?.documents.first else
+            {
+              completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
+              return
+            }
+            do
+            {
+              //Delete all the Parkings for the user
+            let user = try document.data(as: User.self)
+            self.deleteAllParkingsFromFirestore(for: user!.cars.map({$0.licensePlateNumber})) { result in
+              if result.type == .success
+              {
+                document.reference.delete()
+                completion(Result(type: .success, message: "Deleted Successfully"))
+              }
+              else
+              {
+                completion(result)
+              }
+            }
+            }
+            catch let err
+            {
+              let result = Result(type: .success, message: "Error : \(err.localizedDescription)")
+              completion(result)
+              return
+            }
+          })
+        }
     
 }
 

@@ -9,8 +9,6 @@ import UIKit
 
 class ParkingListTableViewController: UITableViewController {
 
-    let defaults = UserDefaults.standard
-    
     private var listOfAllParkings : [Parking] = [Parking]()
     
     @IBOutlet weak var lblParkingMessage: UILabel!
