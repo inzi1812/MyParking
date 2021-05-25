@@ -32,55 +32,55 @@ Rajdeep Dodiya - 101320088
 
 Firebase:
 
-<img src="Screenshots/Firebase" >
+<img src="Screenshots/Firebase.jpg">
 
 Sign In Page:
 
-<img src="Screenshots/Sign_In_Screen" width="276" height="599" >
+<img src="Screenshots/Sign_In_Screen.png" width="276" height="599">
 
 Sign up Page:
 
-<img src="Screenshots/Sign_Up_Screen" width="276" height="599" >
+<img src="Screenshots/Sign_Up_Screen.png" width="276" height="599">
 
 Sign Up Page validations:
-<img src="Screenshots/Sign_Up_Screen2" width="276" height="599" > 
-<img src="Screenshots/Sign_Up_Screen3" width="276" height="599" > 
-<img src="Screenshots/Sign_Up_Screen4" width="276" height="599" > 
+
+<img src="Screenshots/Sign_Up_Screen2.png" width="276" height="599"> <img src="Screenshots/Sign_Up_Screen3.png" width="276" height="599"> <img src="Screenshots/Sign_Up_Screen4.png" width="276" height="599"> 
+
 
 Add Parking Page:
 
-<img src="Screenshots/Add_Parking_Screen_Before" width="276" height="599" >
+<img src="Screenshots/Add_Parking_Screen_Before.png" width="276" height="599" >
 
-Add Parking Page Validations:
-<img src="Screenshots/Add_Parking_Screen_Car_Selection" width="276" height="599" > 
-<img src="Screenshots/Add_Parking_Screen_No_Of_Hours_Selection" width="276" height="599" > 
-<img src="Screenshots/Add_Parking_Screen_After" width="276" height="599" >
+Add Parking Page with selection menus:
+
+<img src="Screenshots/Add_Parking_Screen_Car_Selection.png" width="276" height="599" > <img src="Screenshots/Add_Parking_Screen_No_Of_Hours_Selection.png" width="276" height="599" > <img src="Screenshots/Add_Parking_Screen_After.png" width="276" height="599" >
+
 
 Parking List Page:
 
-<img src="Screenshots/Parking_List_Screen" width="276" height="599" >
+<img src="Screenshots/Parking_List_Screen.png" width="276" height="599" >
 
 Parking Detail Page:
 
-<img src="Screenshots/Parking_Detail_Screen" width="276" height="599" >
+<img src="Screenshots/Parking_Detail_Screen.png" width="276" height="599" >
 
 Show Directions Page:
 
-<img src="Screenshots/Show_Directions_Screen" width="276" height="599" >
+<img src="Screenshots/Show_Directions_Screen.png" width="276" height="599" >
 
 User Profile Page:
 
-<img src="Screenshots/User_Profile_Screen" width="276" height="599" >
+<img src="Screenshots/User_Profile_Screen.png" width="276" height="599" >
 
 Add Car Functionality:
 
-<img src="Screenshots/Add_Car_Functionality" width="276" height="599" >
+<img src="Screenshots/Add_Car_Functionality.png" width="276" height="599" >
 
 Update Profile Page:
 
-<img src="Screenshots/Update_Profile_Screen" width="276" height="599" >
+<img src="Screenshots/Update_Profile_Screen.png" width="276" height="599" >
 
 User Profile Page after Update and Add New Car functionality:
 
-<img src="Screenshots/User_Profile_Screen_After_Update" width="276" height="599" >
+<img src="Screenshots/User_Profile_Screen_After_Update.png" width="276" height="599" >
 
