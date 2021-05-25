@@ -63,6 +63,12 @@ class UserProfileVC: UIViewController {
             
             self.addCar(name: name, plateNumber: licensePlatenumber)
         }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            action in
+            
+            
+        }))
 
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
@@ -135,7 +141,10 @@ class UserProfileVC: UIViewController {
     
     private func addCar(name: String, plateNumber: String)
     {
-        DBHelper.getInstance().addVehicle(plateNumber: plateNumber) { result in
+        
+        let car = Car(carName: name, licensePlateNumber: plateNumber)
+        
+        DBHelper.getInstance().addVehicle(car: car) { result in
             
             if result.type == .success
             {

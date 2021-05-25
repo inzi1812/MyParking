@@ -133,14 +133,14 @@ extension DBHelper
         
     }
     
-    func addVehicle(plateNumber : String, completion : @escaping (Result) -> Void)
+    func addVehicle(car : Car, completion : @escaping (Result) -> Void)
     {
         
         if checkNetworkConnection()
         {
             
             //Connected to Internet
-            self.addVehicleinFirestore(plateNumber: plateNumber, user: currentUser!) { tResult in
+            self.addVehicleinFirestore(car: car, user: currentUser!) { tResult in
                 
                 completion(tResult)
             }
@@ -392,10 +392,10 @@ extension DBHelper
     }
     
     
-    private func addVehicleinFirestore(plateNumber : String, user: User, completion : @escaping (Result) -> Void)
+    private func addVehicleinFirestore(car : Car, user: User, completion : @escaping (Result) -> Void)
     {
         
-        checkLicensePlateNumberExistsInFirestore(plateNumber: plateNumber) { tResult in
+        checkLicensePlateNumberExistsInFirestore(plateNumber: car.licensePlateNumber) { tResult in
             
             if tResult.type != .failure
             {
@@ -410,24 +410,43 @@ extension DBHelper
         
         var tUser = user
         
-        let car = Car(licensePlateNumber: plateNumber)
         
         tUser.cars.append(car)
         
-        do
-        {
-            try firestore.collection(USER_ENTITY).document(user.email).setData(from: tUser)
-            let result = Result(type: .success, message: "Vehicle Added Successfully")
+
+            firestore.collection(USER_ENTITY).whereField("email", isEqualTo: user.email).getDocuments(completion: { queries, err in
+                
+                
+                guard err == nil else
+                {
+                    completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
+                    return
+                }
+                
+                guard let document = queries?.documents.first else
+                {
+                    completion(Result(type: .failure, message: "Error: \(err?.localizedDescription ?? "")"))
+                    return
+                }
+                
+                do
+                {
+                    try document.reference.setData(from: tUser)
+                }
+                catch let err
+                {
+                    let result = Result(type: .success, message: "Error : \(err.localizedDescription)")
+                    
+                    completion(result)
+                    return
+                }
+                
+                
+                completion(Result(type: .success, message: "Updated Successfully"))
+                
+            })
             
-            completion(result)
-            
-        }
-        catch let err
-        {
-            let result = Result(type: .success, message: "Error : \(err.localizedDescription)")
-            
-            completion(result)
-        }
+
         
     }
     
@@ -507,10 +526,6 @@ extension DBHelper
                 return
             }
             
-            
-            
-            
-            
         }
     }
     
@@ -558,7 +573,7 @@ extension DBHelper
             
             doc.delete()
 //            { err in
-//            
+//
 //            if err != nil
 //            {
 //                let result = Result(type: .failure, message: "Error: \(err?.localizedDescription)")
@@ -568,7 +583,7 @@ extension DBHelper
 //            {
 //                completion(Result(type: .success, message: "User Deleted Succesfully"))
 //            }
-//            
+//
 //        }
     }
 
