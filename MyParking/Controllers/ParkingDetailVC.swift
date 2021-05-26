@@ -32,6 +32,7 @@ class ParkingDetailVC: UIViewController {
     
     let locationManager = CLLocationManager()
 
+    var sourceLocation : CLLocationCoordinate2D!
     
     private let dateFormatter = DateFormatter()
     
@@ -42,6 +43,7 @@ class ParkingDetailVC: UIViewController {
 
         setUpLocationManager()
         setUI()
+        
         showDirectionsBtn.addTarget(self, action: #selector(launchNavigation), for: .touchUpInside)
         
         
@@ -55,8 +57,10 @@ class ParkingDetailVC: UIViewController {
         
         if CLLocationManager.locationServicesEnabled()
         {
-//            locationManager.delegate = self
+            locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
+            locationManager.startUpdatingLocation()
         }
         else
         {
@@ -79,7 +83,6 @@ class ParkingDetailVC: UIViewController {
         dateFormatter.dateFormat = "MMM dd YYYY hh:mm a"
         self.lblParkingDate.text = dateFormatter.string(from: self.parking.dateOfParking)
         
-        self.displayLocationOnMap(location: parking.location)
     }
     
     
@@ -87,19 +90,52 @@ class ParkingDetailVC: UIViewController {
     {
         mapView.removeAnnotations(mapView.annotations)
 
+        let destinationLocation = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
         
-        let clLocation = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let region = MKCoordinateRegion(center: clLocation, span: span)
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.coordinate = destinationLocation
+        destinationAnnotation.title = "your Vehicle is here"
         
-        self.mapView.setRegion(region, animated: true)
+        let sourceAnnotation = MKPointAnnotation()
+        sourceAnnotation.coordinate = sourceLocation
+        sourceAnnotation.title = "you are here"
         
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = clLocation
-        annotation.title = "your Vehicle is here"
+        self.mapView.addAnnotation(sourceAnnotation)
+        self.mapView.addAnnotation(destinationAnnotation)
         
-        self.mapView.addAnnotation(annotation)
+        
+        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation)
+        let destPlacemark = MKPlacemark(coordinate: destinationLocation)
+
+        
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: sourcePlacemark)
+        directionRequest.destination = MKMapItem(placemark: destPlacemark)
+        directionRequest.transportType = .automobile
+        
+        
+        let directions = MKDirections(request: directionRequest)
+        
+        directions.calculate { (response, error) in
+             guard let directionResonse = response else {
+                 if let error = error {
+                     print("we have error getting directions = \(error.localizedDescription)")
+                 }
+                 return
+             }
+             
+             //get route and assign to our route variable
+             let route = directionResonse.routes[0]
+             
+            self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+             
+            let rect = route.polyline.boundingMapRect.insetBy(dx: 100, dy: 100)
+            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+         }
+        
+        mapView.delegate = self
+        
     }
 
     @objc private func launchNavigation()
@@ -142,7 +178,37 @@ class ParkingDetailVC: UIViewController {
 }
 
 
-//extension ParkingDetailVC : CLLocationManagerDelegate
-//{
-//
-//}
+extension ParkingDetailVC : CLLocationManagerDelegate
+{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let location = locations.first?.coordinate else
+        {
+            return
+        }
+        
+        sourceLocation = location
+        mapView.removeOverlays(mapView.overlays)
+        self.displayLocationOnMap(location: parking.location)
+
+        
+//        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        print(error.localizedDescription)
+//        manager.stopUpdatingLocation()
+    }
+    
+}
+
+extension ParkingDetailVC : MKMapViewDelegate
+{
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 4.0
+        return renderer
+    }
+}
