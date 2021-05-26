@@ -239,48 +239,24 @@ extension DBHelper
             
             //Connected to Internet
             
-            self.checkLicensePlateNumberExistsInFirestore(plateNumber: car.licensePlateNumber) { res in
-                
-                if res.type == .failure
-                {
-                    //no such car
-                    self.getUser { tUser, result in
-                        
-                        if result.type == .success
-                        {
-                            self.addVehicleinFirestore(car: car, user: tUser!) { tResult in
-                                
-                                completion(tResult)
-                            }
-                        }
-                        else
-                        {
-                            completion(result)
-                        }
-                        
-                    }
 
+            //no such car
+            self.getUser { tUser, result in
+                
+                if result.type == .success
+                {
+                    
+                    self.addVehicleinFirestore(car: car, user: tUser!) { tResult in
+                        
+                        completion(tResult)
+                    }
                 }
                 else
                 {
-                    
-                    if res.type == .success
-                    {
-                       
-                        completion(Result(type: .failure, message: "LicensePlate number exists already"))
-                    }
-                    else
-                    {
-                        completion(res)
-
-                    }
-                    
+                    completion(result)
                 }
                 
             }
-            
-            
-            
             
         }
         else
@@ -556,48 +532,42 @@ extension DBHelper
         }
     }
     
-    private func checkLicensePlateNumberExistsInFirestore(plateNumber : String, completion : @escaping (Result ) -> Void)
-    {
-        firestore.collection(USER_ENTITY).whereField("licensePlateNum", arrayContains: plateNumber).getDocuments { queryResults, err in
-            
-            if let _ = queryResults?.documents.first
-            {
-                let result = Result(type: .success, message: "License Plate Number Already Exists in the System")
-                completion(result)
-                
-            }
-            else
-            {
-                let result = Result(type: .failure, message: "License Plate Number is Not in Database")
-                
-                completion(result)
-            }
-            
-        }
-        
-        
-        
-    }
+//    private func checkLicensePlateNumberExistsInFirestore(plateNumber : String, completion : @escaping (Result ) -> Void)
+//    {
+//        firestore.collection(USER_ENTITY).whereField("licensePlateNum", arrayContains: plateNumber).getDocuments { queryResults, err in
+//
+//            if let _ = queryResults?.documents.first
+//            {
+//                let result = Result(type: .success, message: "License Plate Number Already Exists in the System")
+//                completion(result)
+//
+//            }
+//            else
+//            {
+//                let result = Result(type: .failure, message: "License Plate Number is Not in Database")
+//
+//                completion(result)
+//            }
+//
+//        }
+//
+//
+//
+//    }
     
     
     private func addVehicleinFirestore(car : Car, user: User, completion : @escaping (Result) -> Void)
     {
         
-        checkLicensePlateNumberExistsInFirestore(plateNumber: car.licensePlateNumber) { tResult in
-            
-            if tResult.type != .failure
-            {
-                var temp = tResult
-                temp.type = .failure
-                //License Plate is already in the system
-                completion(temp)
-                return
-            }
-            
-        }
         
         var tUser = user
         
+        if tUser.cars.map({$0.licensePlateNumber}).contains(car.licensePlateNumber)
+        {
+            //Already there
+            completion(Result(type: .failure, message: "Car Already there with User"))
+            return
+        }
         
         tUser.cars.append(car)
         
