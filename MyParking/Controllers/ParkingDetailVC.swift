@@ -130,8 +130,11 @@ class ParkingDetailVC: UIViewController {
              
             self.mapView.addOverlay(route.polyline, level: .aboveRoads)
              
-            let rect = route.polyline.boundingMapRect.insetBy(dx: 100, dy: 100)
-            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+            let rect = route.polyline.boundingMapRect
+            
+            let trect = self.mapView.mapRectThatFits(rect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50))
+            
+            self.mapView.setRegion(MKCoordinateRegion(trect), animated: true)
          }
         
         mapView.delegate = self
